@@ -1,28 +1,7 @@
-import math
-from functools import lru_cache
-
 import pygame
-import numpy as np
-import colorcet as cc
 
-from mandelbrot.domain import MandelbrotComputer, ColorMap
-
-
-@lru_cache(maxsize=1)
-def _reverse_color_aliases():
-    alias_mapping = {}
-    for name, aliases in cc.aliases.items():
-        for alias in aliases:
-            alias_mapping[alias] = name
-    return alias_mapping
-
-
-def get_colormap(name: str) -> ColorMap:
-    mpl_colors = getattr(cc, _reverse_color_aliases()[name])
-    colors = np.zeros((len(mpl_colors), 3), dtype=np.uint8)
-    for idx, color in enumerate(mpl_colors):
-        colors[idx, :] = [math.floor(channel * 255) for channel in color]
-    return colors
+from mandelbrot.colors import Colors
+from mandelbrot.domain import MandelbrotComputer
 
 
 class Mandelbrot:
@@ -61,7 +40,7 @@ class Mandelbrot:
         self.clock = pygame.time.Clock()
         self.running = True
 
-        self.colors = get_colormap("fire")
+        self.color = Colors("linear_kryw_0_100_c71")  # alias: fire
         self.font = pygame.sysfont.SysFont("helveticaneue", 24)
 
         # The (mathematical) center of the screen
@@ -128,7 +107,7 @@ class Mandelbrot:
                 x_range,
                 y_range,
                 self.cutoff,
-                self.colors,
+                self.color.map,
             )
 
             pygame.surfarray.blit_array(self.screen, pixels)
