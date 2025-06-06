@@ -95,6 +95,11 @@ class Mandelbrot:
             self.cutoff = max(
                 2, min(int(self.cutoff / self.detail_scale), self.cutoff - 1)
             )
+        if keys[pygame.K_c]:
+            if keys[pygame.K_LSHIFT]:
+                self.color.previous()
+            else:
+                self.color.next()
 
     def start(self, mandelbrot_computer: MandelbrotComputer):
         while self.running:
