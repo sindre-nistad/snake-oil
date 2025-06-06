@@ -67,38 +67,34 @@ def apply_colormap(
     return pixels
 
 
-def ranges(
-    screen: pygame.Surface, center: pygame.Vector2, size: float
-) -> tuple[tuple[float, float], tuple[float, float]]:
-    x_center, y_center = center
-    width, height = screen.get_width(), screen.get_height()
-    ratio = height / width
-    x_range = (x_center - size / 2, x_center + size / 2)
-    y_range = ((y_center - size / 2) * ratio, (y_center + size / 2) * ratio)
-    return x_range, y_range
-
-
-def mouse_direction(screen: pygame.Surface) -> pygame.Vector2:
-    mouse_x, mouse_y = pygame.mouse.get_pos()
-    width, height = screen.get_width(), screen.get_height()
-    return pygame.Vector2(
-        x=(mouse_x - width / 2) / width,
-        y=(mouse_y - height / 2) / height,
-    )
-
-
-def mouse_position(
-    screen: pygame.Surface, center: pygame.Vector2, size: float
-) -> pygame.Vector2:
-    direction = mouse_direction(screen)
-    x_range, y_range = ranges(screen, center, size)
-    return pygame.Vector2(
-        x=direction.x * (x_range[1] - x_range[0]),
-        y=direction.y * (y_range[1] - y_range[0]),
-    )
-
-
 class Mandelbrot:
+    def ranges(self) -> tuple[tuple[float, float], tuple[float, float]]:
+        x_center, y_center = self.center
+        width, height = self.screen.get_width(), self.screen.get_height()
+        ratio = height / width
+        x_range = (x_center - self.size / 2, x_center + self.size / 2)
+        y_range = (
+            (y_center - self.size / 2) * ratio,
+            (y_center + self.size / 2) * ratio,
+        )
+        return x_range, y_range
+
+    def mouse_direction(self) -> pygame.Vector2:
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+        width, height = self.screen.get_width(), self.screen.get_height()
+        return pygame.Vector2(
+            x=(mouse_x - width / 2) / width,
+            y=(mouse_y - height / 2) / height,
+        )
+
+    def mouse_position(self) -> pygame.Vector2:
+        direction = self.mouse_direction()
+        x_range, y_range = self.ranges()
+        return pygame.Vector2(
+            x=direction.x * (x_range[1] - x_range[0]),
+            y=direction.y * (y_range[1] - y_range[0]),
+        )
+
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((1280, 720))
@@ -128,7 +124,7 @@ class Mandelbrot:
             elif event.type == pygame.MOUSEMOTION:
                 left, middle, right = event.buttons
                 if left:
-                    x_range, y_range = ranges(self.screen, self.center, self.size)
+                    x_range, y_range = self.ranges()
                     diff = pygame.Vector2(
                         x=event.rel[0]
                         / self.screen.get_width()
@@ -139,18 +135,14 @@ class Mandelbrot:
                     )
                     self.center -= diff
             elif event.type == pygame.MOUSEWHEEL:
-                mouse_position_before_zoom = mouse_position(
-                    self.screen, self.center, self.size
-                )
+                mouse_position_before_zoom = self.mouse_position()
                 if event.precise_y < 0:
                     # Zoom out
                     self.size *= self.zoom_factor
                 else:
                     # Zoom in
                     self.size /= self.zoom_factor
-                mouse_position_after_zoom = mouse_position(
-                    self.screen, self.center, self.size
-                )
+                mouse_position_after_zoom = self.mouse_position()
 
                 diff = (
                     mouse_position_before_zoom - mouse_position_after_zoom
@@ -171,7 +163,7 @@ class Mandelbrot:
         while self.running:
             self.handle_events()
 
-            x_range, y_range = ranges(self.screen, self.center, self.size)
+            x_range, y_range = self.ranges()
             divergence = compute_mandelbrot(
                 self.screen.get_width(),
                 self.screen.get_height(),
