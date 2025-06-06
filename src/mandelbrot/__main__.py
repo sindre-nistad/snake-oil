@@ -3,8 +3,9 @@ from functools import lru_cache
 
 import pygame
 import numpy as np
-import numpy.typing as npt
 import colorcet as cc
+
+from mandelbrot.domain import MandelbrotComputer, ColorMap
 
 
 @lru_cache(maxsize=1)
@@ -16,55 +17,12 @@ def _reverse_color_aliases():
     return alias_mapping
 
 
-def get_colormap(name: str) -> npt.NDArray[np.uint8]:
+def get_colormap(name: str) -> ColorMap:
     mpl_colors = getattr(cc, _reverse_color_aliases()[name])
     colors = np.zeros((len(mpl_colors), 3), dtype=np.uint8)
     for idx, color in enumerate(mpl_colors):
         colors[idx, :] = [math.floor(channel * 255) for channel in color]
     return colors
-
-
-def mandelbrot(x: float, y: float, cutoff: int) -> int:
-    """Compute the margins of the mandelbrot set"""
-    z = 0 + 0j
-    c = x + y * 1j
-    iterations = 0
-    while iterations < cutoff and abs(z) <= 2:
-        z = z**2 + c
-        iterations += 1
-    # The first iteration could be considered the zeroth, as z will always be 0
-    # in that iteration, so the loop will be executed at least once.
-    return iterations - 1
-
-
-def compute_mandelbrot(
-    width: int, height: int, x: tuple[float, float], y: tuple[float, float], cutoff: int
-) -> npt.NDArray[np.uint32]:
-    divergence = np.zeros((width, height), dtype=np.uint32)
-    x_scale = abs(x[0] - x[1]) / width
-    y_scale = abs(y[0] - y[1]) / height
-
-    for i in range(width):
-        for j in range(height):
-            divergence[i, j] = mandelbrot(
-                x[0] + i * x_scale, y[0] + j * y_scale, cutoff
-            )
-    return divergence
-
-
-def apply_colormap(
-    divergence: np.array,
-    cutoff: int,
-    colormap: list[tuple[float, float, float]]
-    | npt.NDArray[tuple[float, float, float]],
-):
-    color_index = (divergence / cutoff * len(colormap)).astype(np.uint32)
-    n, m = divergence.shape
-    pixels = np.zeros((n, m, 3), dtype=np.uint8)
-    for i in range(n):
-        for j in range(m):
-            pixels[i, j, :] = colormap[color_index[i, j]]
-    return pixels
 
 
 class Mandelbrot:
@@ -159,20 +117,20 @@ class Mandelbrot:
                 2, min(int(self.cutoff / self.detail_scale), self.cutoff - 1)
             )
 
-    def start(self):
+    def start(self, mandelbrot_computer: MandelbrotComputer):
         while self.running:
             self.handle_events()
 
             x_range, y_range = self.ranges()
-            divergence = compute_mandelbrot(
+            pixels = mandelbrot_computer.compute(
                 self.screen.get_width(),
                 self.screen.get_height(),
                 x_range,
                 y_range,
                 self.cutoff,
+                self.colors,
             )
 
-            pixels = apply_colormap(divergence, self.cutoff, self.colors)
             pygame.surfarray.blit_array(self.screen, pixels)
 
             # flip() the display to put your work on screen
@@ -191,8 +149,10 @@ class Mandelbrot:
 
 
 def run():
+    from mandelbrot.implementations.pure import PureMandelbrotComputer
+
     app = Mandelbrot()
-    app.start()
+    app.start(PureMandelbrotComputer())
 
 
 if __name__ == "__main__":
