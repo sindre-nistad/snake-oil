@@ -69,7 +69,7 @@ def apply_colormap(
 
 def ranges(
     screen: pygame.Surface, center: pygame.Vector2, size: float
-) -> [[float, float], [float, float]]:
+) -> tuple[tuple[float, float], tuple[float, float]]:
     x_center, y_center = center
     width, height = screen.get_width(), screen.get_height()
     ratio = height / width
@@ -98,94 +98,109 @@ def mouse_position(
     )
 
 
-def run():
-    pygame.init()
-    screen = pygame.display.set_mode((1280, 720))
-    pygame.display.set_caption("Mandelbrot")
+class Mandelbrot:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((1280, 720))
+        pygame.display.set_caption("Mandelbrot")
 
-    clock = pygame.time.Clock()
-    running = True
+        self.clock = pygame.time.Clock()
+        self.running = True
 
-    colors = get_colormap("fire")
-    font = pygame.sysfont.SysFont("helveticaneue", 24)
+        self.colors = get_colormap("fire")
+        self.font = pygame.sysfont.SysFont("helveticaneue", 24)
 
-    # The (mathematical) center of the screen
-    center = pygame.Vector2(-1, 0)
-    # The (mathematical) with of the screen
-    size = 2
-    zoom_factor = 1.2
+        # The (mathematical) center of the screen
+        self.center = pygame.Vector2(-1, 0)
+        # The (mathematical) with of the screen
+        self.size = 2
+        self.zoom_factor = 1.2
 
-    dt = 0
+        self.cutoff = 10
 
-    cutoff = 10
+        self.detail_scale = 1.3
+        self.info = pygame.rect.Rect(0, 0, 400, 100)
 
-    detail_scale = 1.3
-    info = pygame.rect.Rect(0, 0, 400, 100)
-
-    def handle_events():
-        nonlocal running, center, size, x_range, y_range, cutoff
-
+    def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                self.running = False
             elif event.type == pygame.MOUSEMOTION:
                 left, middle, right = event.buttons
                 if left:
-                    x_range, y_range = ranges(screen, center, size)
+                    x_range, y_range = ranges(self.screen, self.center, self.size)
                     diff = pygame.Vector2(
-                        x=event.rel[0] / screen.get_width() * (x_range[1] - x_range[0]),
+                        x=event.rel[0]
+                        / self.screen.get_width()
+                        * (x_range[1] - x_range[0]),
                         y=event.rel[1]
-                        / screen.get_height()
+                        / self.screen.get_height()
                         * (y_range[1] - y_range[0]),
                     )
-                    center -= diff
+                    self.center -= diff
             elif event.type == pygame.MOUSEWHEEL:
-                mouse_position_before_zoom = mouse_position(screen, center, size)
+                mouse_position_before_zoom = mouse_position(
+                    self.screen, self.center, self.size
+                )
                 if event.precise_y < 0:
                     # Zoom out
-                    size *= zoom_factor
+                    self.size *= self.zoom_factor
                 else:
                     # Zoom in
-                    size /= zoom_factor
-                mouse_position_after_zoom = mouse_position(screen, center, size)
+                    self.size /= self.zoom_factor
+                mouse_position_after_zoom = mouse_position(
+                    self.screen, self.center, self.size
+                )
 
                 diff = (
                     mouse_position_before_zoom - mouse_position_after_zoom
-                ) * zoom_factor
-                center += diff
+                ) * self.zoom_factor
+                self.center += diff
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_PLUS] or keys[pygame.K_KP_PLUS]:
             # Increase 'resolution'
-            cutoff = max(int(cutoff * detail_scale), cutoff + 1)
+            self.cutoff = max(int(self.cutoff * self.detail_scale), self.cutoff + 1)
         if keys[pygame.K_MINUS] or keys[pygame.K_KP_MINUS]:
             # Decrease 'resolution'
-            cutoff = max(2, min(int(cutoff / detail_scale), cutoff - 1))
+            self.cutoff = max(
+                2, min(int(self.cutoff / self.detail_scale), self.cutoff - 1)
+            )
 
-    while running:
-        handle_events()
+    def start(self):
+        while self.running:
+            self.handle_events()
 
-        x_range, y_range = ranges(screen, center, size)
-        divergence = compute_mandelbrot(
-            screen.get_width(), screen.get_height(), x_range, y_range, cutoff
-        )
+            x_range, y_range = ranges(self.screen, self.center, self.size)
+            divergence = compute_mandelbrot(
+                self.screen.get_width(),
+                self.screen.get_height(),
+                x_range,
+                y_range,
+                self.cutoff,
+            )
 
-        pixels = apply_colormap(divergence, cutoff, colors)
-        pygame.surfarray.blit_array(screen, pixels)
+            pixels = apply_colormap(divergence, self.cutoff, self.colors)
+            pygame.surfarray.blit_array(self.screen, pixels)
 
-        # flip() the display to put your work on screen
-        pygame.display.flip()
+            # flip() the display to put your work on screen
+            pygame.display.flip()
 
-        dt = clock.tick(60) / 1000
-        screen.blit(
-            font.render(
-                f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, (255, 255, 255)
-            ),
-            info,
-        )
-        pygame.display.update()
+            dt = self.clock.tick(60) / 1000
+            self.screen.blit(
+                self.font.render(
+                    f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, (255, 255, 255)
+                ),
+                self.info,
+            )
+            pygame.display.update()
 
-    pygame.quit()
+        pygame.quit()
+
+
+def run():
+    app = Mandelbrot()
+    app.start()
 
 
 if __name__ == "__main__":
