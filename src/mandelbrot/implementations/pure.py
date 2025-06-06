@@ -1,10 +1,10 @@
 import numpy as np
 import numpy.typing as npt
 
-from mandelbrot.domain import MandelbrotComputer, ColorMap
+from mandelbrot.domain import MandelbrotComputerInterface, ColorMap
 
 
-class PureMandelbrotComputer(MandelbrotComputer):
+class PureMandelbrotComputer(MandelbrotComputerInterface):
     def compute(self, width, height, x_range, y_range, cutoff, colors):
         divergence = compute_mandelbrot(
             width,

@@ -9,7 +9,7 @@ ColorMap: TypeAlias = (
 )
 
 
-class MandelbrotComputer(ABC):
+class MandelbrotComputerInterface(ABC):
     @abstractmethod
     def compute(
         self,

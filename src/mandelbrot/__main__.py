@@ -1,7 +1,7 @@
 import pygame
 
 from mandelbrot.colors import Colors
-from mandelbrot.domain import MandelbrotComputer
+from mandelbrot.domain import MandelbrotComputerInterface
 
 
 class Mandelbrot:
@@ -101,7 +101,7 @@ class Mandelbrot:
             else:
                 self.color.next()
 
-    def start(self, mandelbrot_computer: MandelbrotComputer):
+    def start(self, mandelbrot_computer: MandelbrotComputerInterface):
         while self.running:
             self.handle_events()
 
@@ -133,10 +133,12 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.pure import PureMandelbrotComputer
+    from mandelbrot.implementations.pure import (
+        PureMandelbrotComputer as MandelbrotComputer,
+    )
 
     app = Mandelbrot()
-    app.start(PureMandelbrotComputer())
+    app.start(MandelbrotComputer())
 
 
 if __name__ == "__main__":
