@@ -21,3 +21,11 @@ repos:
         args: [ --fix ]
       # Run the formatter.
       - id: ruff-format
+
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.0.0-beta.5
+    hooks:
+      - id: biome-check
+        # Formatting HTML is currently in beta, so we need to manually add it to the files regex
+        files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|css|html|svelte|vue|astro|graphql|gql)$"
+        exclude: "^.*/(.pnp.loader.mjs|.pnp.cjs)"
