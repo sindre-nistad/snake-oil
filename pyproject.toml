@@ -9,3 +9,7 @@ dependencies = [
     "numpy>=2.2.6",
     "pygame>=2.6.1",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
