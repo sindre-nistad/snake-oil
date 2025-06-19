@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "colorcet>=3.1.0",
+    "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
     "numpy>=2.2.6",
     "pygame>=2.6.1",
@@ -20,3 +21,4 @@ build-backend = "hatchling.build"
 
 [tool.uv.sources]
 mandelbrot-implementations-cython-naive = { path = "src/mandelbrot/implementations/cython/cython_naive" }
+mandelbrot-implementations-cython-direct = { path = "src/mandelbrot/implementations/cython/cython_direct" }

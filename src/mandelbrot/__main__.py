@@ -133,7 +133,7 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.cython.cython_naive import (
+    from mandelbrot.implementations.cython.cython_direct import (
         CythonMandelbrotComputer as MandelbrotComputer,
     )
 
