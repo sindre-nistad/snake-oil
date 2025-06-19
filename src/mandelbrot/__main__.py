@@ -7,10 +7,15 @@ from mandelbrot.domain import MandelbrotComputerInterface
 
 
 class Mandelbrot:
+    @property
+    def aspect_ratio(self) -> float:
+        return self.screen.get_width() / self.screen.get_height()
+
     def ranges(self) -> tuple[tuple[float, float], tuple[float, float]]:
         x_center, y_center = self.center
-        width, height = self.screen.get_width(), self.screen.get_height()
-        ratio = height / width
+        # Our scaling assumes a squre (we don't use separate scaling for the x- and y-axis)
+        # To ensure the fractal is not stretched, we adjust the y-axis
+        ratio = 1 / self.aspect_ratio
         x_range = (x_center - self.size / 2, x_center + self.size / 2)
         y_range = (
             (y_center - self.size / 2) * ratio,
@@ -77,7 +82,8 @@ class Mandelbrot:
                         * (x_range[1] - x_range[0]),
                         y=event.rel[1]
                         / self.screen.get_height()
-                        * (y_range[1] - y_range[0]),
+                        * (y_range[1] - y_range[0])
+                        * self.aspect_ratio,
                     )
                     self.center -= diff
             elif event.type == pygame.MOUSEWHEEL:
@@ -90,9 +96,8 @@ class Mandelbrot:
                     self.size /= self.zoom_factor
                 mouse_position_after_zoom = self.mouse_position()
 
-                diff = (
-                    mouse_position_before_zoom - mouse_position_after_zoom
-                ) * self.zoom_factor
+                diff = mouse_position_before_zoom - mouse_position_after_zoom
+                diff.y *= self.aspect_ratio
                 self.center += diff
 
         keys = pygame.key.get_pressed()
