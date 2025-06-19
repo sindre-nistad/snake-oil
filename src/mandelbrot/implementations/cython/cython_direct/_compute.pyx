@@ -59,7 +59,9 @@ def compute_mandelbrot(
 
     with cython.nogil(), parallel():
         for i in prange(width):
-            for j in prange(height):
+            # It seems the framerate is more stable when only the outer loop is parallelized
+            # ref. https://ppc.cs.aalto.fi/ch3/nested/ and suggestion by CoPilot
+            for j in range(height):
                 divergence = mandelbrot(
                     x_min + i * x_scale, y_min + j * y_scale, cutoff
                 )
