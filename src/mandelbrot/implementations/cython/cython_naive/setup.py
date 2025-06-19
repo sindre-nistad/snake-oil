@@ -1,10 +1,10 @@
 import glob
+import platform
 from pathlib import Path
 
-from setuptools import setup, Extension
-from Cython.Build import cythonize
 import numpy as np
-import platform
+from Cython.Build import cythonize
+from setuptools import Extension, setup
 
 
 def setup_builder(name: str):

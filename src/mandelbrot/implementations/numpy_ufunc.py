@@ -1,7 +1,7 @@
 import numpy as np
 import numpy.typing as npt
 
-from mandelbrot.domain import MandelbrotComputerInterface, ColorMap
+from mandelbrot.domain import ColorMap, MandelbrotComputerInterface
 
 
 class UFuncMandelbrotComputer(MandelbrotComputerInterface):

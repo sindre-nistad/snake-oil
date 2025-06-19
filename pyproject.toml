@@ -22,3 +22,6 @@ build-backend = "setuptools.build_meta"
 [tool.uv.sources]
 mandelbrot-implementations-cython-naive = { path = "src/mandelbrot/implementations/cython/cython_naive" }
 mandelbrot-implementations-cython-direct = { path = "src/mandelbrot/implementations/cython/cython_direct" }
+
+[tool.ruff.lint]
+select = ["I"]
