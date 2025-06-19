@@ -17,6 +17,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "colorcet" },
+    { name = "mandelbrot-implementations-native-cython" },
     { name = "numpy" },
     { name = "pygame" },
 ]
@@ -24,9 +25,24 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "colorcet", specifier = ">=3.1.0" },
+    { name = "mandelbrot-implementations-native-cython", directory = "src/mandelbrot/implementations/naive_cython" },
     { name = "numpy", specifier = ">=2.2.6" },
     { name = "pygame", specifier = ">=2.6.1" },
 ]
+
+[[package]]
+name = "mandelbrot-implementations-native-cython"
+version = "0.1.0"
+source = { directory = "src/mandelbrot/implementations/naive_cython" }
+dependencies = [
+    { name = "numpy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "numpy" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "cython", specifier = ">=3.1.1" }]
 
 [[package]]
 name = "numpy"
