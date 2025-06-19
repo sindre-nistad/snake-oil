@@ -35,6 +35,30 @@
 						+ c \end{aligned}\]
 					</p>
 				</section>
+				<section>...</section>
+				<section>
+					<h1>Profiling</h1>
+					<h2>
+						<code>cython</code>
+					</h2>
+					<p>
+						<pre><code>
+					# cython: profile=True
+					# cython: linetrace=True
+					# distutils: define_macros=CYTHON_TRACE_NOGIL=1
+				</code></pre>
+					</p>
+					<p>
+						NOTE: Can be <strong>very</strong>slow
+					</p>
+					<p>
+						For more information, see
+						<a
+							href="https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html"
+							>Cython's page on profiling</a
+						>
+					</p>
+				</section>
 			</div>
 		</div>
 

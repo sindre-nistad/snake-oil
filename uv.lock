@@ -17,6 +17,8 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "colorcet" },
+    { name = "mandelbrot-implementations-cython-direct" },
+    { name = "mandelbrot-implementations-cython-naive" },
     { name = "numpy" },
     { name = "pygame" },
 ]
@@ -24,9 +26,39 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "colorcet", specifier = ">=3.1.0" },
+    { name = "mandelbrot-implementations-cython-direct", directory = "src/mandelbrot/implementations/cython/cython_direct" },
+    { name = "mandelbrot-implementations-cython-naive", directory = "src/mandelbrot/implementations/cython/cython_naive" },
     { name = "numpy", specifier = ">=2.2.6" },
     { name = "pygame", specifier = ">=2.6.1" },
 ]
+
+[[package]]
+name = "mandelbrot-implementations-cython-direct"
+version = "0.1.0"
+source = { directory = "src/mandelbrot/implementations/cython/cython_direct" }
+dependencies = [
+    { name = "numpy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "numpy" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "cython", specifier = ">=3.1.1" }]
+
+[[package]]
+name = "mandelbrot-implementations-cython-naive"
+version = "0.1.0"
+source = { directory = "src/mandelbrot/implementations/cython/cython_naive" }
+dependencies = [
+    { name = "numpy" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "numpy" }]
+
+[package.metadata.requires-dev]
+dev = [{ name = "cython", specifier = ">=3.1.1" }]
 
 [[package]]
 name = "numpy"

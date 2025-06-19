@@ -10,6 +10,18 @@ This version is more refined and polished and in English rather than Norwegian.
 
 ### Demonstration
 
+#### macOS
+Part of the demonstration uses Cython with OpenMP for parallelization.
+
+macOS' LLVM toolchain does not support `-fopenmp`, so we use Homebrew's LLVM toolchain instead.
+
+```bash
+brew install llvm
+export CC=$(brew --prefix llvm)/bin/clang
+export CXX=$(brew --prefix llvm)/bin/clang++
+```
+
+
 #### Using `pip`
 Assuming a [virtual environment](https://docs.python.org/3/library/venv.html#creating-virtual-environments) is set up,
 running the demonstration can be done by executing
