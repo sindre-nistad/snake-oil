@@ -3,7 +3,7 @@ from pathlib import Path
 import pygame
 
 from mandelbrot.colors import Colors
-from mandelbrot.domain import MandelbrotComputerInterface
+from mandelbrot.domain import MandelbrotComputerInterface, Pixels
 
 
 class Mandelbrot:
@@ -135,21 +135,26 @@ class Mandelbrot:
                 self.color.map,
             )
 
-            pygame.surfarray.blit_array(self.screen, pixels)
+            self.update_screen(pixels)
 
-            # flip() the display to put your work on screen
-            pygame.display.flip()
-
-            dt = self.clock.tick(60) / 1000
-            self.screen.blit(
-                self.font.render(
-                    f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, (255, 255, 255)
-                ),
-                self.info,
-            )
-            pygame.display.update()
+            self.update_fram_counter()
 
         pygame.quit()
+
+    def update_screen(self, pixels: Pixels) -> None:
+        pygame.surfarray.blit_array(self.screen, pixels)
+        # flip() the display to put your work on screen
+        pygame.display.flip()
+
+    def update_fram_counter(self) -> None:
+        dt = self.clock.tick(60) / 1000
+        self.screen.blit(
+            self.font.render(
+                f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, (255, 255, 255)
+            ),
+            self.info,
+        )
+        pygame.display.update()
 
 
 def run():

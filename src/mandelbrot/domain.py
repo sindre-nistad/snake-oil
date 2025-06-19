@@ -8,6 +8,8 @@ ColorMap: TypeAlias = (
     list[tuple[float, float, float]] | npt.NDArray[tuple[float, float, float]]
 )
 
+Pixels: TypeAlias = npt.NDArray[np.uint8]
+
 
 class MandelbrotComputerInterface(ABC):
     @abstractmethod
@@ -19,4 +21,4 @@ class MandelbrotComputerInterface(ABC):
         y_range: tuple[float, float],
         cutoff: int,
         colors: ColorMap,
-    ) -> npt.NDArray[np.uint8]: ...
+    ) -> Pixels: ...
