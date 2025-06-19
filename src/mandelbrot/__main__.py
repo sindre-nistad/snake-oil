@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pygame
 
 from mandelbrot.colors import Colors
@@ -41,7 +43,14 @@ class Mandelbrot:
         self.running = True
 
         self.color = Colors("linear_kryw_0_100_c71")  # alias: fire
-        self.font = pygame.sysfont.SysFont("helveticaneue", 24)
+        self.font = pygame.font.Font(
+            Path(__file__).parent
+            / "assets"
+            / "fonts"
+            / "liberation_sans"
+            / "LiberationSans.ttc",
+            24,
+        )
 
         # The (mathematical) center of the screen
         self.center = pygame.Vector2(-1, 0)

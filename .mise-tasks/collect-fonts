@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly ROOT_DIR
+
+function main() {
+
+    pushd "$ROOT_DIR/src/mandelbrot/assets/fonts/liberation_sans" >/dev/null
+
+    if [[ ! $(command -v ttx >/dev/null) ]]; then
+        if [[ ! -d ".venv" ]]; then
+            python3 -m venv .venv
+        fi
+        # shellcheck disable=SC1091
+        source .venv/bin/activate
+        if [[ ! -f .venv/bin/ttx ]]; then
+            pip install fonttools
+        fi
+    fi
+
+    echo "Collecting fonts"
+    local temp_file=LiberationSans.tmp
+    ttx LiberationSans*.ttf -q -o "$temp_file" >/dev/null
+    ttx "$temp_file" -q -o LiberationSans.ttc >/dev/null
+    rm "$temp_file"
+}
+
+main "$@"
