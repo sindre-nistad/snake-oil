@@ -8,8 +8,16 @@ from mandelbrot.domain import MandelbrotComputerInterface
 
 class Mandelbrot:
     @property
+    def width(self):
+        return self.screen.get_width()
+
+    @property
+    def height(self):
+        return self.screen.get_height()
+
+    @property
     def aspect_ratio(self) -> float:
-        return self.screen.get_width() / self.screen.get_height()
+        return self.width / self.height
 
     def ranges(self) -> tuple[tuple[float, float], tuple[float, float]]:
         x_center, y_center = self.center
@@ -25,7 +33,7 @@ class Mandelbrot:
 
     def mouse_direction(self) -> pygame.Vector2:
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        width, height = self.screen.get_width(), self.screen.get_height()
+        width, height = self.width, self.height
         return pygame.Vector2(
             x=(mouse_x - width / 2) / width,
             y=(mouse_y - height / 2) / height,
@@ -77,11 +85,9 @@ class Mandelbrot:
                 if left:
                     x_range, y_range = self.ranges()
                     diff = pygame.Vector2(
-                        x=event.rel[0]
-                        / self.screen.get_width()
-                        * (x_range[1] - x_range[0]),
+                        x=event.rel[0] / self.width * (x_range[1] - x_range[0]),
                         y=event.rel[1]
-                        / self.screen.get_height()
+                        / self.height
                         * (y_range[1] - y_range[0])
                         * self.aspect_ratio,
                     )
@@ -121,8 +127,8 @@ class Mandelbrot:
 
             x_range, y_range = self.ranges()
             pixels = mandelbrot_computer.compute(
-                self.screen.get_width(),
-                self.screen.get_height(),
+                self.width,
+                self.height,
                 x_range,
                 y_range,
                 self.cutoff,
