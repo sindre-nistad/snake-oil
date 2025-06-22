@@ -158,8 +158,8 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.cython.cython_direct import (
-        CythonMandelbrotComputer as MandelbrotComputer,
+    from mandelbrot.implementations.numba.numba_jit import (
+        MandelbrotComputer as MandelbrotComputer,
     )
 
     app = Mandelbrot()

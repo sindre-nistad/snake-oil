@@ -1,0 +1,12 @@
+[project]
+name = "mandelbrot.implementations.numba"
+version = "0.1.0"
+description = "Mandelbrot implemented using Numba's JIT compilation"
+
+dependencies = [
+    "numba",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
