@@ -8,6 +8,10 @@ This version is more refined and polished and in English rather than Norwegian.
 
 ## Setup
 
+Uses [`mise`](https://mise.jdx.dev/getting-started.html) and [`uv`](https://docs.astral.sh/uv/getting-started/installation/)
+
+CUDA: https://developer.nvidia.com/cuda-toolkit
+
 ### Demonstration
 
 #### macOS
@@ -19,6 +23,12 @@ macOS' LLVM toolchain does not support `-fopenmp`, so we use Homebrew's LLVM too
 brew install llvm
 export CC=$(brew --prefix llvm)/bin/clang
 export CXX=$(brew --prefix llvm)/bin/clang++
+```
+
+#### Debian
+
+```bash
+sudo apt-get install -y libpomp-dev
 ```
 
 
