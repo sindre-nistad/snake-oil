@@ -1,5 +1,6 @@
 import numpy as np
 from numba import njit
+from numba.core.types import UniTuple, float64, uint8, uint32
 from numpy import typing as npt
 
 from mandelbrot.domain import ColorMap, MandelbrotComputerInterface
@@ -20,7 +21,7 @@ class MandelbrotComputer(MandelbrotComputerInterface):
 
 
 @njit(
-    "uint32(float64, float64, uint32)",
+    uint32(float64, float64, uint32),
     fastmath=True,
     nogil=True,
     inline="always",
@@ -40,7 +41,7 @@ def mandelbrot(x: float, y: float, cutoff: int) -> int:
 
 
 @njit(
-    "uint32[:,::1](uint32, uint32, UniTuple(float64, 2), UniTuple(float64, 2), uint32)",
+    uint32[:, ::1](uint32, uint32, UniTuple(float64, 2), UniTuple(float64, 2), uint32),
     fastmath=True,
     boundscheck=False,
 )
@@ -60,7 +61,7 @@ def compute_mandelbrot(
 
 
 @njit(
-    "uint8[:, :, ::1](uint32[:, ::1], uint32, uint8[:, ::1])",
+    uint8[:, :, ::1](uint32[:, ::1], uint32, uint8[:, ::1]),
     fastmath=True,
     boundscheck=False,
 )
