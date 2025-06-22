@@ -28,7 +28,6 @@ def setup_builder(name: str):
             ]
             if is_windows
             else [
-                "-lomp",
                 "-fopenmp",
             ],
             include_dirs=[
