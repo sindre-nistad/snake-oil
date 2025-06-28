@@ -21,7 +21,7 @@ class Mandelbrot:
 
     def ranges(self) -> tuple[tuple[float, float], tuple[float, float]]:
         x_center, y_center = self.center
-        # Our scaling assumes a squre (we don't use separate scaling for the x- and y-axis)
+        # Our scaling assumes a square (we don't use separate scaling for the x- and y-axis)
         # To ensure the fractal is not stretched, we adjust the y-axis
         ratio = 1 / self.aspect_ratio
         x_range = (x_center - self.size / 2, x_center + self.size / 2)
