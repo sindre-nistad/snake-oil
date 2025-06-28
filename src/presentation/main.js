@@ -1,11 +1,13 @@
 import Reveal from "reveal.js";
+import Highlight from "reveal.js/plugin/highlight/highlight.esm";
 import Markdown from "reveal.js/plugin/markdown/markdown.esm";
 import RevealMath from "reveal.js/plugin/math/math.esm";
+import "./assets/atelier-dune-light.css";
 import "reveal.js/dist/reveal.css";
 import "reveal.js/dist/theme/sky.css";
 
 Reveal.initialize({
-	plugins: [Markdown, RevealMath.KaTeX],
+	plugins: [Markdown, RevealMath.KaTeX, Highlight],
 	hash: true,
 	progress: true,
 	markdown: {
