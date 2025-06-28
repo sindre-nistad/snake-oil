@@ -4,7 +4,7 @@ import numpy.typing as npt
 from mandelbrot.domain import ColorMap, MandelbrotComputerInterface
 
 
-class PureMandelbrotComputer(MandelbrotComputerInterface):
+class MandelbrotComputer(MandelbrotComputerInterface):
     def compute(self, width, height, x_range, y_range, cutoff, colors):
         divergence = compute_mandelbrot(
             width,

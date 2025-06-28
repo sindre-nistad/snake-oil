@@ -6,7 +6,7 @@ except ImportError:
     from cython_naive import _compute
 
 
-class CythonMandelbrotComputer(MandelbrotComputerInterface):
+class MandelbrotComputer(MandelbrotComputerInterface):
     def compute(self, width, height, x_range, y_range, cutoff, colors):
         divergence = _compute.compute_mandelbrot(
             width, height, x_range, y_range, cutoff

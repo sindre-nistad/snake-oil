@@ -8,7 +8,7 @@ except ImportError:
     from cython_direct import _compute
 
 
-class CythonMandelbrotComputer(MandelbrotComputerInterface):
+class MandelbrotComputer(MandelbrotComputerInterface):
     def compute(self, width, height, x_range, y_range, cutoff, colors):
         pixels = np.ndarray((width, height, 3), dtype=np.uint8)
         _compute.compute_mandelbrot(

@@ -158,9 +158,7 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.numba.numba_jit import (
-        MandelbrotComputer as MandelbrotComputer,
-    )
+    from mandelbrot.implementations.numba.numba_jit import MandelbrotComputer
 
     app = Mandelbrot()
     app.start(MandelbrotComputer())
