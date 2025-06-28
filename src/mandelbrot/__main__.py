@@ -4,6 +4,7 @@ import pygame
 
 from mandelbrot.colors import Colors
 from mandelbrot.domain import MandelbrotComputerInterface, Pixels
+from mandelbrot.frame_counter import FrameCounter
 
 
 class Mandelbrot:
@@ -52,18 +53,9 @@ class Mandelbrot:
         self.screen = pygame.display.set_mode((1280, 720))
         pygame.display.set_caption("Mandelbrot")
 
-        self.clock = pygame.time.Clock()
         self.running = True
 
         self.color = Colors("linear_kryw_0_100_c71")  # alias: fire
-        self.font = pygame.font.Font(
-            Path(__file__).parent
-            / "assets"
-            / "fonts"
-            / "liberation_sans"
-            / "LiberationSans.ttc",
-            24,
-        )
 
         # The (mathematical) center of the screen
         self.center = pygame.Vector2(-1, 0)
@@ -74,7 +66,7 @@ class Mandelbrot:
         self.cutoff = 10
 
         self.detail_scale = 1.3
-        self.info = pygame.rect.Rect(0, 0, 400, 100)
+        self.frame_counter = FrameCounter(self.screen)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -137,7 +129,7 @@ class Mandelbrot:
 
             self.update_screen(pixels)
 
-            self.update_fram_counter()
+            self.frame_counter.update()
 
         pygame.quit()
 
@@ -145,16 +137,6 @@ class Mandelbrot:
         pygame.surfarray.blit_array(self.screen, pixels)
         # flip() the display to put your work on screen
         pygame.display.flip()
-
-    def update_fram_counter(self) -> None:
-        dt = self.clock.tick(60) / 1000
-        self.screen.blit(
-            self.font.render(
-                f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, (255, 255, 255)
-            ),
-            self.info,
-        )
-        pygame.display.update()
 
 
 def run():
