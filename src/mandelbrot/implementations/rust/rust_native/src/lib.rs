@@ -1,8 +1,8 @@
 use ::pyo3::prelude::*;
 use ::pyo3::Python;
-use num::complex::{Complex, ComplexFloat};
-use numpy::{PyArrayMethods, PyArray2, PyArray3, IntoPyArray};
 use ndarray::{Array2, Array3};
+use num::complex::{Complex, ComplexFloat};
+use numpy::{IntoPyArray, PyArray2, PyArray3, PyArrayMethods};
 
 /// Compute the margins of the mandelbrot set
 fn mandelbrot(x: f64, y: f64, cutoff: u32) -> u32 {
@@ -19,19 +19,29 @@ fn mandelbrot(x: f64, y: f64, cutoff: u32) -> u32 {
 }
 
 #[pyfunction]
-fn compute_mandelbrot<'py>(py: Python<'py>, width: usize, height: usize, x: (f64, f64), y: (f64, f64), cutoff: u32) -> PyResult<Bound<'py, numpy::PyArray2<u32>>> {
+fn compute_mandelbrot<'py>(
+    py: Python<'py>,
+    width: usize,
+    height: usize,
+    x: (f64, f64),
+    y: (f64, f64),
+    cutoff: u32,
+) -> PyResult<Bound<'py, numpy::PyArray2<u32>>> {
     let mut pixels = Array2::<u32>::zeros((width, height));
     let x_scale = num::abs(x.0 - x.1) / (width as f64);
     let y_scale = num::abs(y.0 - y.1) / (height as f64);
 
     for i in 0..width {
         for j in 0..height {
-            pixels[[i, j]] = mandelbrot(x.0 + (i as f64) * x_scale, y.0 + (j as f64) * y_scale, cutoff)
+            pixels[[i, j]] = mandelbrot(
+                x.0 + (i as f64) * x_scale,
+                y.0 + (j as f64) * y_scale,
+                cutoff,
+            )
         }
     }
     Ok(pixels.into_pyarray(py))
 }
-
 
 #[pyfunction]
 fn apply_colormap<'py>(
@@ -43,9 +53,7 @@ fn apply_colormap<'py>(
     let conv = divergence
         .readonly()
         .as_array()
-        .map(|num| {
-        (*num as f64 / (cutoff as f64) * (colormap.len() as f64)) as u8
-    });
+        .map(|num| (*num as f64 / (cutoff as f64) * (colormap.len() as f64)) as u8);
     let [n, m] = conv.shape() else {
         panic!("Empty divergence matrix")
     };
