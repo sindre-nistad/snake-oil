@@ -1,0 +1,71 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  find-packages:
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.packages.outputs.packages }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+      - id: packages
+        run: |
+          echo "packages=$(.mise-tasks/enumerate-packages)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-pure
+          path: ./wheelhouse/*-py3-none-any.whl
+          compression-level: 0
+
+  build-packages:
+    needs: find-packages
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
+          - windows-latest
+          - windows-11-arm  # Not supported by maturin (yet)
+          - macos-13  # Intel / x84 based macOS
+          - macos-latest  # Apple silicon
+        package: ${{ fromJSON(needs.find-packages.outputs.packages) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+      - run: |
+          python -m pip install "cibuildwheel==3.0.0"
+
+      - name: Install LLVM with OpenMP support on macOS
+        if: ${{ startsWith(matrix.os, 'macos-') }}
+        run: |
+          brew install llvm
+          # Export relevant environment variables
+          cat <<EOF >> $GITHUB_ENV
+          CC=$(brew --prefix llvm)/bin/clang
+          CXX=$(brew --prefix llvm)/bin/clang++
+          EOF
+
+      - name: Build wheels
+        run: |
+          .mise-tasks/build-package "${{ matrix.package }}"
+        shell: bash
+
+      - name: Adjust artifact name
+        id: artifact-name
+        run: |
+          echo "PACKAGE=$(echo ${{ matrix.package }} | sed 's|/|-|g')" >> "$GITHUB_ENV"
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cibw-wheels-${{ matrix.os }}-${{ env.PACKAGE }}
+          path: ./wheelhouse/*.whl
+          compression-level: 0

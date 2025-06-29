@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${TRACE:-}" == "1" ]]; then
+    set -x
+fi
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly ROOT_DIR
+
+function _cibuildwheel() {
+    if command -v cibuildwheel >/dev/null; then
+        cibuildwheel "$@"
+    elif python -c 'import cibuildwheel' 2>/dev/null; then
+        python -m cibuildwheel "$@"
+    else
+        echo "cibuildwheel is required to run this script" >/dev/stderr
+        exit 1
+    fi
+}
+
+function main() {
+    local path="$1"
+
+    pushd "$path" >/dev/null
+    _cibuildwheel --output-dir "$ROOT_DIR/wheelhouse"
+    popd >/dev/null
+}
+
+main "$@"
