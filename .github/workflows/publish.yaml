@@ -72,3 +72,23 @@ jobs:
           name: cibw-wheels-${{ matrix.os }}-${{ env.PACKAGE }}
           path: ./wheelhouse/*.whl
           compression-level: 0
+
+  publish-packages:
+    needs:
+      - find-packages
+      - build-packages
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: cibw-wheels-*
+          merge-multiple: true
+          path: wheelhouse
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: wheelhouse
+          attestations: true
+          skip-existing: true
