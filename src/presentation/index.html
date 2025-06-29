@@ -59,6 +59,35 @@
 						>
 					</p>
 				</section>
+				<section>
+					<h1>Rust</h1>
+
+					<aside class="notes">
+						Parallelize the Rust code:
+
+						<pre><code data-trim class="language-bash">
+							cd src/mandelbrot/implementations/rust/rust_native
+							cargo add ndarray --features rayon
+						</code> </pre>
+						then add
+						<pre><code data-trim class="language-rust">
+							use ndarray::{Array3, Array2, Zip};
+							use ndarray::parallel::prelude::*;
+						</code> </pre>
+						and replace the for loop with
+						<pre><code data-trim class="language-rust">
+							Zip::indexed(pixels.view_mut()).par_for_each(|(i, j), val| {
+								*val = mandelbrot(
+									x.0 + (i as f64) * x_scale,
+									y.0 + (j as f64) * y_scale,
+									cutoff,
+								)
+							});
+						</code> </pre>
+						as a bonus, or for those who don't like the Mandelbrot set, we could
+						do one of the Julia sets $ c = -0.8 + 0.156i $
+					</aside>
+				</section>
 			</div>
 		</div>
 
