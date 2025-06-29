@@ -57,6 +57,7 @@ jobs:
         run: |
           .mise-tasks/build-package "${{ matrix.package }}"
         env:
+          CIBW_SKIP: "*-musllinux*"
           MACOSX_DEPLOYMENT_TARGET: "14.0"
         shell: bash
 
