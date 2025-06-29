@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "colorcet>=3.1.0",
+    "mandelbrot-implementation-rust-native",
     "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
     "mandelbrot-implementations-numba",
@@ -24,6 +25,8 @@ build-backend = "setuptools.build_meta"
 mandelbrot-implementations-cython-naive = { path = "src/mandelbrot/implementations/cython/cython_naive" }
 mandelbrot-implementations-cython-direct = { path = "src/mandelbrot/implementations/cython/cython_direct" }
 mandelbrot-implementations-numba = { path = "src/mandelbrot/implementations/numba/numba_jit" }
+mandelbrot-implementation-rust-native = { path = "src/mandelbrot/implementations/rust/rust_native" }
+
 
 [tool.ruff.lint]
 select = ["I"]

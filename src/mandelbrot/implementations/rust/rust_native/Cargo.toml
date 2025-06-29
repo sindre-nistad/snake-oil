@@ -1,0 +1,21 @@
+[package]
+name = "rust-native"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "_rust_native"
+crate-type = ["cdylib"]
+
+[dependencies]
+ndarray = "0.16.1"
+num = "0.4.3"
+numpy = "0.25.0"
+pyo3 = "0.25.0"
+
+
+[profile.release]
+debug = true
+lto = true
+codegen-units = 1

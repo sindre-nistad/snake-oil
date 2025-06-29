@@ -40,3 +40,11 @@ repos:
     hooks:
       - id: shfmt  # prebuilt upstream executable
         args: ["-w", "-i", "4"]
+
+  - repo: local
+    hooks:
+      - id: rust-format
+        name: Format Rust
+        entry: cargo fmt --manifest-path src/mandelbrot/implementations/rust/rust_native/Cargo.toml --all --package
+        language: system
+        files: ^.*\.rs$
