@@ -140,7 +140,7 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.rust.rust_native import MandelbrotComputer
+    from mandelbrot.implementations.nvidia_cuda import MandelbrotComputer
 
     app = Mandelbrot()
     app.start(MandelbrotComputer())

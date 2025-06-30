@@ -10,6 +10,7 @@ dependencies = [
     "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
     "mandelbrot-implementations-numba",
+    "mandelbrot-implementations-nvidia-cuda",
     "numpy>=2.2.6",
     "pygame>=2.6.1",
 ]
@@ -26,6 +27,7 @@ mandelbrot-implementations-cython-naive = { path = "src/mandelbrot/implementatio
 mandelbrot-implementations-cython-direct = { path = "src/mandelbrot/implementations/cython/cython_direct" }
 mandelbrot-implementations-numba = { path = "src/mandelbrot/implementations/numba/numba_jit" }
 mandelbrot-implementation-rust-native = { path = "src/mandelbrot/implementations/rust/rust_native" }
+mandelbrot-implementations-nvidia-cuda = { path = "src/mandelbrot/implementations/nvidia_cuda" }
 
 
 [tool.ruff.lint]

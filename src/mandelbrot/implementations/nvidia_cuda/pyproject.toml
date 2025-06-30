@@ -1,0 +1,14 @@
+[project]
+name = "mandelbrot.implementations.nvidia-cuda"
+version = "0.1.0"
+description = "Implementing the Mandelbrot set using Nvidia's CUDA API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "cuda-core[cu12]>=0.3.0",
+    "cupy-cuda12x>=13.4.1",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
