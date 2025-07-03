@@ -7,15 +7,17 @@ from cuda.core.experimental import Device, LaunchConfig, Program, ProgramOptions
 from mandelbrot.domain import ColorMap, MandelbrotComputerInterface, Pixels
 
 
-class MandelbrotComputer(MandelbrotComputerInterface):
+class NvidiaGPU:
     def __init__(self):
-        with open(Path(__file__).parent / "mandelbrot.cu") as f:
-            code = f.read()
-        device = Device()
-        device.set_current()
-        self.stream = device.create_stream()
+        self.device = Device()
+        self.device.set_current()
 
-        arch = "".join(f"{i}" for i in device.compute_capability)
+    def compile(
+        self,
+        program: str,
+        methods: tuple[str, ...],
+    ):
+        arch = "".join(f"{i}" for i in self.device.compute_capability)
         program_options = ProgramOptions(
             std="c++17",
             arch=f"sm_{arch}",
@@ -23,11 +25,24 @@ class MandelbrotComputer(MandelbrotComputerInterface):
                 cp.cuda.get_cuda_path() + "/include",
             ],
         )
-        prog = Program(code, code_type="c++", options=program_options)
+        prog = Program(program, code_type="c++", options=program_options)
         module = prog.compile(
             "cubin",
-            name_expressions=("compute_mandelbrot", "apply_colormap"),
+            name_expressions=methods,
         )
+        return module
+
+
+class MandelbrotComputer(MandelbrotComputerInterface):
+    def __init__(self):
+        self.gpu = NvidiaGPU()
+        self.stream = self.gpu.device.create_stream()
+        # Tell cuPy to use our GPU stream
+        cp.cuda.ExternalStream(int(self.stream.handle), self.gpu.device.device_id).use()
+
+        with open(Path(__file__).parent / "mandelbrot.cu") as f:
+            code = f.read()
+        module = self.gpu.compile(code, ("compute_mandelbrot", "apply_colormap"))
 
         self.ker_compute_mandelbrot = module.get_kernel("compute_mandelbrot")
         self.ker_apply_colormap = module.get_kernel("apply_colormap")
@@ -54,15 +69,12 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         cutoff: int,
     ):
         size = width * height
-        block = 256
-        grid = (size + block - 1) // block
-        config = LaunchConfig(grid=grid, block=block)
 
         divergence = cp.empty(size, dtype=cp.uint32)
 
         launch(
             self.stream,
-            config,
+            self._configuration(size),
             self.ker_compute_mandelbrot,
             width,
             height,
@@ -86,9 +98,6 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         divergence: cp.ndarray,
     ):
         size = len(divergence)
-        block = 256
-        grid = (size + block - 1) // block
-        config = LaunchConfig(grid=grid, block=block)
 
         _colormap = cp.asarray(colors, dtype=cp.uint8).reshape(
             np.prod(colors.shape), order="F"
@@ -96,7 +105,7 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         pixels = cp.empty(size * 3, dtype=cp.uint8)
         launch(
             self.stream,
-            config,
+            self._configuration(size),
             self.ker_apply_colormap,
             divergence.data.ptr,
             cutoff,
@@ -107,3 +116,9 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         )
         self.stream.sync()
         return pixels
+
+    @staticmethod
+    def _configuration(size: int) -> LaunchConfig:
+        block = 256
+        grid = (size + block - 1) // block
+        return LaunchConfig(grid=grid, block=block)
