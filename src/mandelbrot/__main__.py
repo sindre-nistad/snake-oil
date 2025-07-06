@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import pygame
 
 from mandelbrot.colors import Colors
