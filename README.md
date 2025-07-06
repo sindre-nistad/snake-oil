@@ -10,6 +10,42 @@ This version is more refined and polished and in English rather than Norwegian.
 
 ### Demonstration
 
+To run the `mandelbrot` program, you will need
+* [`mise`](https://mise.jdx.dev/getting-started.htmlvfox) (or [`vfox`](https://vfox.dev/guides/quick-start.html) or [`asdf`](https://asdf-vm.com/guide/getting-started.html)) to install and manage the runtimes used
+* A C compiler
+  * Windows
+    * [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/)
+  * Linux
+    * [`gcc`](https://gcc.gnu.org/) or [`llvm`](https://llvm.org/)
+  * macOS
+    * [`llvm`](https://llvm.org/)
+
+      **NOTE**: The Cython example uses [OpenMP](https://www.openmp.org/) for parallelization which is not supported on the version of Clang Apple ships with the OS.
+
+      Instead, use Homebrew's LLVM; `brew install llvm` and
+      ```bash
+      export CC=$(brew --prefix llvm)/bin/clang
+      export CXX=$(brew --prefix llvm)/bin/clang++
+      ```
+* [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit) for the GPU example
+  * The demonstration was given using version 12.9 Update 1 for Windows
+  * Nvidia have more [information on CUDA and Python](https://developer.nvidia.com/how-to-cuda-python)
+
+```bash
+mise trust .
+mise install
+```
+
+To run the demonstration, I recommend using [`uv`](https://docs.astral.sh/uv/getting-started/installation/) (installed when using `mise`).
+The main reason for that, is that some of the demonstration (e.g. Cython and Rust) requires compilation which `uv` is configured to handle "automagically".
+
+```bash
+uv run python -m mandelbrot
+```
+
+**NOTE**: This will compile _every_ implementation, which may take a little while.
+If you want to use a single implementation, you may have to manually adjust `pyproject.toml` to remove the implementation(s) you don't want to use.
+
 #### macOS
 Part of the demonstration uses Cython with OpenMP for parallelization.
 
@@ -30,6 +66,8 @@ running the demonstration can be done by executing
 pip install -e .
 python3 -m mandelbrot
 ```
+
+This will (likely) use pre-compiled packages of the various implementations, which are available on PyPi.
 
 ### Presentation
 
