@@ -1,4 +1,5 @@
 import math
+from pathlib import Path
 
 import colorcet as cc
 import numpy as np
@@ -6,10 +7,39 @@ import numpy as np
 from mandelbrot.domain import ColorMap
 
 
+def _get_project_root():
+    path = Path(__file__)
+    while not (path / "pyproject.toml").exists() and path != path.anchor:
+        path = path.parent
+    if path == path.anchor:
+        raise ValueError("Could not find the project root")
+    return path
+
+
+class StoredColor:
+    LOCATION = _get_project_root() / ".mandelbrot-color.txt"
+
+    @classmethod
+    def loads(cls):
+        with open(cls.LOCATION) as f:
+            return f.read().strip()
+
+    @classmethod
+    def dumps(cls, color: str):
+        with open(cls.LOCATION, "w") as f:
+            f.write(color)
+
+
 class Colors:
-    def __init__(self, name: str):
+    def __init__(self, name: str | None = None):
         self._name = ""
         self.map = []
+        if name is None:
+            try:
+                name = StoredColor.loads()
+            except FileNotFoundError:
+                # Default color if none have been stored
+                name = "linear_kryw_0_100_c71"  # alias: fire
         self.name = name
         self.possible_colors = cc.all_original_names(group="linear")
 
@@ -21,6 +51,7 @@ class Colors:
     def name(self, value):
         self.map = self.get_colormap(value)
         self._name = value
+        StoredColor.dumps(value)
 
     def next(self):
         self._change_color(1)

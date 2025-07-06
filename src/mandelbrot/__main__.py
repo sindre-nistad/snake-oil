@@ -53,7 +53,7 @@ class Mandelbrot:
 
         self.running = True
 
-        self.color = Colors("linear_kryw_0_100_c71")  # alias: fire
+        self.color = Colors()
 
         # The (mathematical) center of the screen
         self.center = pygame.Vector2(-1, 0)
