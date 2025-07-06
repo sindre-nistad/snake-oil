@@ -31,7 +31,7 @@ jobs:
           - ubuntu-latest
           - ubuntu-24.04-arm
           - windows-latest
-          - windows-11-arm  # Not supported by maturin (yet)
+          # - windows-11-arm  # Not supported by maturin (yet)
           - macos-13  # Intel / x84 based macOS
           - macos-latest  # Apple silicon
         package: ${{ fromJSON(needs.find-packages.outputs.packages) }}
