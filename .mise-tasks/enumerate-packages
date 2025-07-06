@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+import json
+import shutil
+import subprocess
+from pathlib import Path
+
+import tomllib
+
+ROOT = Path(__file__).parent.parent
+
+
+def is_pure(package: str) -> bool:
+    try:
+        subprocess.run(
+            f"pip wheel --wheel-dir wheelhouse  --no-deps .",
+            shell=True,
+            check=True,
+            capture_output=True,
+            cwd=package,
+        )
+    except subprocess.CalledProcessError:
+        # Presumably a compilation has failed, and so we assume it is not pure.
+        return False
+    pure_wheels = list((Path(package) / "wheelhouse").glob("*-py3-none-any.whl"))
+    return len(pure_wheels) > 0
+
+
+def main():
+    with open("pyproject.toml", "rb") as f:
+        pyproject = tomllib.load(f)
+    packages = []
+    wheelhouse = ROOT / "wheelhouse"
+    wheelhouse.mkdir(exist_ok=True)
+    for source in pyproject["tool"]["uv"]["sources"].values():
+        package = source["path"]
+        if not is_pure(package):
+            packages.append(package)
+        else:
+            for wheel in (Path(package) / "wheelhouse").glob("*.whl"):
+                shutil.move(wheel, wheelhouse)
+    print(json.dumps(packages))
+
+
+if __name__ == "__main__":
+    main()
