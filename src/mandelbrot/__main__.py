@@ -5,7 +5,7 @@ from mandelbrot.domain import MandelbrotComputerInterface, Pixels
 from mandelbrot.frame_counter import FrameCounter
 
 
-class Mandelbrot:
+class InteractionState:
     @property
     def width(self):
         return self.screen.get_width()
@@ -46,10 +46,8 @@ class Mandelbrot:
             y=direction.y * (y_range[1] - y_range[0]),
         )
 
-    def __init__(self):
-        pygame.init()
-        self.screen = pygame.display.set_mode((1280, 720))
-        pygame.display.set_caption("Mandelbrot")
+    def __init__(self, screen: pygame.Surface):
+        self.screen = screen
 
         self.running = True
 
@@ -64,7 +62,6 @@ class Mandelbrot:
         self.cutoff = 10
 
         self.detail_scale = 1.3
-        self.frame_counter = FrameCounter(self.screen)
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -111,18 +108,29 @@ class Mandelbrot:
             else:
                 self.color.next()
 
-    def start(self, mandelbrot_computer: MandelbrotComputerInterface):
-        while self.running:
-            self.handle_events()
 
-            x_range, y_range = self.ranges()
+class Mandelbrot:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((1280, 720))
+        pygame.display.set_caption("Mandelbrot")
+
+        self.state = InteractionState(self.screen)
+
+        self.frame_counter = FrameCounter(self.screen)
+
+    def start(self, mandelbrot_computer: MandelbrotComputerInterface):
+        while self.state.running:
+            self.state.handle_events()
+
+            x_range, y_range = self.state.ranges()
             pixels = mandelbrot_computer.compute(
-                self.width,
-                self.height,
+                self.screen.get_width(),
+                self.screen.get_height(),
                 x_range,
                 y_range,
-                self.cutoff,
-                self.color.map,
+                self.state.cutoff,
+                self.state.color.map,
             )
 
             self.update_screen(pixels)
