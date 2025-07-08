@@ -200,3 +200,9 @@ wheelhouse/
 
 # Colors
 .mandelbrot-color.txt
+
+# Output from profilers
+
+# Scalene
+profile.html
+profile.json

@@ -7,13 +7,12 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
+				<section
+					data-background-image="/github-url-qr.svg"
+					data-background-size="70%"
+				></section>
 				<section>
-					<h1>Snake Oil</h1>
-					<img
-						class="r-stretch"
-						src="/github-url-qr.svg"
-						alt="QR code for https://github.com/sindre-nistad/snake-oil"
-					>
+					<h1 class="r-fit-text">Snake Oil</h1>
 				</section>
 				<section>
 					<h1>
@@ -23,23 +22,57 @@
 					<span class="fragment">(pronounced similar to cinder 🔥)</span>
 					<p class="fragment">Developer by day, gamer by night</p>
 				</section>
+				<!-- TODO: Remove math on Mandelbrot; not necessary -->
 				<section>
-					<h1>Mandelbrot</h1>
-				</section>
-				<section>
-					<h1>Mandelbrot</h1>
-					<p>A (complex) number $c$ is in the Mandelbrot set if</p>
-					<p>$ |z_{n}| \le 2 $</p>
-					<p>
-						for all $ n \ge 0 $ \[\begin{aligned} z_{0} = 0 \\ z_{n+1} = z_{n}^2
-						+ c \end{aligned}\]
-					</p>
+					<section>
+						<h1>Mandelbrot</h1>
+					</section>
+					<section>
+						<h1>Mandelbrot</h1>
+						<p>A (complex) number $c$ is in the Mandelbrot set if</p>
+						<p>$ |z_{n}| \le 2 $</p>
+						<p>
+							for all $ n \ge 0 $ \[\begin{aligned} z_{0} = 0 \\ z_{n+1} =
+							z_{n}^2 + c \end{aligned}\]
+						</p>
+					</section>
+
+					<section>
+						<iframe
+							width="1086"
+							height="611"
+							src="https://www.youtube.com/embed/0OP9guFmWfs"
+							title="This fractal is more complex than the Mandelbrot set"
+							frameborder="0"
+							allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
+					</section>
+					<section>
+						<iframe
+							width="1086"
+							height="611"
+							src="https://www.youtube.com/embed/FFftmWSzgmk"
+							title="What&#39;s so special about the Mandelbrot Set? - Numberphile"
+							frameborder="0"
+							allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin"
+							allowfullscreen
+						></iframe>
+					</section>
 				</section>
 				<section>...</section>
 				<section>
 					<h1>Profiling</h1>
 					<h2>
-						<code>cython</code>
+						<code>
+							<a
+								href="https://cython.readthedocs.io/en/stable/src/quickstart/overview.html"
+							>
+								cython
+							</a>
+						</code>
 					</h2>
 					<p>
 						<pre><code>
@@ -102,8 +135,9 @@
 								<li>
 									<a
 										href="https://github.com/NVIDIA/cuda-python/tree/main/cuda_core/examples"
-										>CUDA examples</a
 									>
+										CUDA examples
+									</a>
 								</li>
 							</ul>
 						</section>

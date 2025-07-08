@@ -15,6 +15,10 @@ To run the `mandelbrot` program, you will need
 * A C compiler
   * Windows
     * [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/)
+
+    ```pwsh
+     & 'C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\Launch-VsDevShell.ps1'
+    ```
   * Linux
     * [`gcc`](https://gcc.gnu.org/) or [`llvm`](https://llvm.org/)
   * macOS

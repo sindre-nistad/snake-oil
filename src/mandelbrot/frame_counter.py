@@ -24,7 +24,7 @@ class FrameCounter:
         average_color = (colors.sum(axis=(0, 1)) / self._num_pixes).astype(np.uint8)
         color = np.array([255, 255, 255], dtype=np.uint8) - average_color
 
-        dt = self.clock.tick(60) / 1000
+        dt = self.clock.tick() / 1000
         self.screen.blit(
             self.font.render(f"{1 / dt:.2f} fps" if dt < 1 else f"{dt} spf", 1, color),
             self.info,
