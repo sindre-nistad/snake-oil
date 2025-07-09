@@ -80,3 +80,5 @@ corepack enable
 yarn install
 yarn start
 ```
+
+They are also [served via GitHub Pages](https://sindre-nistad.github.io/snake-oil/).
