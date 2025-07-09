@@ -10,7 +10,7 @@ dependencies = [
     "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
     "mandelbrot-implementations-numba",
-    "mandelbrot-implementations-nvidia-cuda",
+    "mandelbrot-implementations-nvidia-cuda; (sys_platform == 'linux' or (os_name == 'nt' and platform_machine == 'x86_64'))",
     "numpy>=2.2.6",
     "pygame>=2.6.1",
 ]
