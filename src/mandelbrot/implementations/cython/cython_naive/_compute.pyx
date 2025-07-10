@@ -6,7 +6,6 @@
 
 import cython
 from cython import double, int, uint
-from cython.parallel import parallel, prange
 import cython.cimports.numpy as cnp
 import numpy as np
 
@@ -55,12 +54,11 @@ def compute_mandelbrot(
     x_scale = abs(x_min - x_max) / width
     y_scale = abs(y_min - y_max) / height
 
-    with cython.nogil(), parallel():
-        for i in prange(width):
-            for j in prange(height):
-                divergence[i, j] = mandelbrot(
-                    x_min + i * x_scale, y_min + j * y_scale, cutoff
-                )
+    for i in range(width):
+        for j in range(height):
+            divergence[i, j] = mandelbrot(
+                x_min + i * x_scale, y_min + j * y_scale, cutoff
+            )
     return divergence
 
 
@@ -70,11 +68,15 @@ def compute_mandelbrot(
     i=int,
     j=int,
 )
-def apply_colormap(divergence: uint[:, ::1], cutoff: uint, colormap):
-    conv = np.floor(np.asarray(divergence) / cutoff * len(colormap)).astype(np.uint64)
-    n, m = conv.shape
+def apply_colormap(
+        divergence: uint[:, ::1],
+        cutoff: uint,
+        colormap,
+):
+    color_indices = np.floor(np.asarray(divergence) / cutoff * len(colormap)).astype(np.uint32)
+    n, m = color_indices.shape
     pixels = np.zeros((n, m, 3), dtype=np.uint8)
     for i in range(n):
         for j in range(m):
-            pixels[i, j, :] = colormap[conv[i][j]]
+            pixels[i, j, :] = colormap[color_indices[i, j]]
     return pixels
