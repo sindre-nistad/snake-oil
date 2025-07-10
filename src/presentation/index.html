@@ -72,6 +72,15 @@
 							>Cython's page on profiling</a
 						>
 					</p>
+
+					<aside class="notes">
+						<pre><code class="language-python">
+
+						for index in prange(width * height):
+							i = index % width
+							j = index // width
+						</code></pre>
+					</aside>
 				</section>
 				<section>
 					<h1>Rust</h1>
