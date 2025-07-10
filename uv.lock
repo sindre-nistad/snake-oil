@@ -153,7 +153,7 @@ dependencies = [
     { name = "mandelbrot-implementations-cython-direct" },
     { name = "mandelbrot-implementations-cython-naive" },
     { name = "mandelbrot-implementations-numba" },
-    { name = "mandelbrot-implementations-nvidia-cuda", marker = "(os_name == 'nt' and platform_machine == 'x86_64') or sys_platform == 'linux'" },
+    { name = "mandelbrot-implementations-nvidia-cuda", marker = "(os_name == 'nt' and platform_machine == 'AMD64') or (os_name == 'nt' and platform_machine == 'x86_64') or sys_platform == 'linux'" },
     { name = "numpy" },
     { name = "pygame" },
 ]
@@ -165,7 +165,7 @@ requires-dist = [
     { name = "mandelbrot-implementations-cython-direct", directory = "src/mandelbrot/implementations/cython/cython_direct" },
     { name = "mandelbrot-implementations-cython-naive", directory = "src/mandelbrot/implementations/cython/cython_naive" },
     { name = "mandelbrot-implementations-numba", directory = "src/mandelbrot/implementations/numba/numba_jit" },
-    { name = "mandelbrot-implementations-nvidia-cuda", marker = "(os_name == 'nt' and platform_machine == 'x86_64') or sys_platform == 'linux'", directory = "src/mandelbrot/implementations/nvidia_cuda" },
+    { name = "mandelbrot-implementations-nvidia-cuda", marker = "(os_name == 'nt' and platform_machine == 'AMD64') or (os_name == 'nt' and platform_machine == 'x86_64') or sys_platform == 'linux'", directory = "src/mandelbrot/implementations/nvidia_cuda" },
     { name = "numpy", specifier = ">=2.2.6" },
     { name = "pygame", specifier = ">=2.6.1" },
 ]
