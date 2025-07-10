@@ -47,9 +47,14 @@ def mandelbrot(x: float, y: float, cutoff: int) -> int:
     boundscheck=False,
 )
 def compute_mandelbrot(
-    width: int, height: int, x: tuple[float, float], y: tuple[float, float], cutoff: int
+    width: int,
+    height: int,
+    x: tuple[float, float],
+    y: tuple[float, float],
+    cutoff: int,
 ) -> npt.NDArray[np.uint32]:
     divergence = np.zeros((width, height), dtype=np.uint32)
+
     x_scale = abs(x[0] - x[1]) / width
     y_scale = abs(y[0] - y[1]) / height
 
