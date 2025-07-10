@@ -204,5 +204,8 @@ wheelhouse/
 # Output from profilers
 
 # Scalene
-profile.html
 profile.json
+profile.html
+
+# cProfile
+Profile.prof
