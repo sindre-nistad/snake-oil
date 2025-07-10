@@ -1,9 +1,9 @@
 import numpy as np
+import numpy.typing as npt
 from numba import njit
 from numba.core.types import UniTuple, float64, uint8, uint32
-from numpy import typing as npt
 
-from mandelbrot.domain import ColorMap, MandelbrotComputerInterface
+from mandelbrot.domain import ColorMap, MandelbrotComputerInterface, Pixels
 
 
 class MandelbrotComputer(MandelbrotComputerInterface):
@@ -15,9 +15,10 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         y_range: tuple[float, float],
         cutoff: int,
         colors: ColorMap,
-    ) -> npt.NDArray[np.uint8]:
+    ) -> Pixels:
         divergence = compute_mandelbrot(width, height, x_range, y_range, cutoff)
-        return apply_colormap(divergence, cutoff, colors)
+        pixels = apply_colormap(divergence, cutoff, colors)
+        return pixels
 
 
 @njit(
@@ -54,7 +55,7 @@ def compute_mandelbrot(
 
     for i in range(width):
         for j in range(height):
-            divergence[i][j] = mandelbrot(
+            divergence[i, j] = mandelbrot(
                 x[0] + i * x_scale, y[0] + j * y_scale, cutoff
             )
     return divergence
@@ -68,12 +69,12 @@ def compute_mandelbrot(
 def apply_colormap(
     divergence: npt.NDArray[np.uint32],
     cutoff: int,
-    colormap: list[tuple[float, float, float]],
+    colormap: ColorMap,
 ):
-    conv = np.floor(divergence / cutoff * len(colormap)).astype(np.uint32)
-    n, m = conv.shape
+    color_indices = np.floor(divergence / cutoff * len(colormap)).astype(np.uint32)
+    n, m = color_indices.shape
     pixels = np.zeros((n, m, 3), dtype=np.uint8)
     for i in range(n):
         for j in range(m):
-            pixels[i, j, :] = colormap[conv[i][j]]
+            pixels[i, j, :] = colormap[color_indices[i, j]]
     return pixels

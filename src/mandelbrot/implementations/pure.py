@@ -1,19 +1,20 @@
 import numpy as np
 import numpy.typing as npt
 
-from mandelbrot.domain import ColorMap, MandelbrotComputerInterface
+from mandelbrot.domain import ColorMap, MandelbrotComputerInterface, Pixels
 
 
 class MandelbrotComputer(MandelbrotComputerInterface):
-    def compute(self, width, height, x_range, y_range, cutoff, colors):
-        divergence = compute_mandelbrot(
-            width,
-            height,
-            x_range,
-            y_range,
-            cutoff,
-        )
-
+    def compute(
+        self,
+        width: int,
+        height: int,
+        x_range: tuple[float, float],
+        y_range: tuple[float, float],
+        cutoff: int,
+        colors: ColorMap,
+    ) -> Pixels:
+        divergence = compute_mandelbrot(width, height, x_range, y_range, cutoff)
         pixels = apply_colormap(divergence, cutoff, colors)
         return pixels
 
@@ -47,14 +48,14 @@ def compute_mandelbrot(
 
 
 def apply_colormap(
-    divergence: np.array,
+    divergence: npt.NDArray[np.uint32],
     cutoff: int,
     colormap: ColorMap,
 ):
-    color_index = (divergence / cutoff * len(colormap)).astype(np.uint32)
-    n, m = divergence.shape
+    color_indices = np.floor(divergence / cutoff * len(colormap)).astype(np.uint32)
+    n, m = color_indices.shape
     pixels = np.zeros((n, m, 3), dtype=np.uint8)
     for i in range(n):
         for j in range(m):
-            pixels[i, j, :] = colormap[color_index[i, j]]
+            pixels[i, j, :] = colormap[color_indices[i, j]]
     return pixels
