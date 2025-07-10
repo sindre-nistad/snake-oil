@@ -84,7 +84,7 @@ class MandelbrotComputer(MandelbrotComputerInterface):
             y_range[1],
             cutoff,
             divergence.data.ptr,
-            cp.uint64(size),
+            cp.uint32(size),
         )
         self.stream.sync()
         return divergence
