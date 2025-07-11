@@ -14,4 +14,5 @@ Reveal.initialize({
 	markdown: {
 		smartypants: true,
 	},
+	totalTime: 25 /* minutes */ * 60 /* seconds */,
 });
