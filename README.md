@@ -57,6 +57,11 @@ export CC=$(brew --prefix llvm)/bin/clang
 export CXX=$(brew --prefix llvm)/bin/clang++
 ```
 
+#### Debian
+
+```bash
+sudo apt-get install -y libpomp-dev
+```
 
 #### Using `pip`
 Assuming a [virtual environment](https://docs.python.org/3/library/venv.html#creating-virtual-environments) is set up,
