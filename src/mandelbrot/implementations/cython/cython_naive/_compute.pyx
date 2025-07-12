@@ -13,7 +13,7 @@ import numpy as np
 cnp.import_array()
 
 
-@cython.cfunc
+@cython.ccall
 @cython.nogil
 def mandelbrot(x: double, y: double, cutoff: uint) -> uint:
     """Compute the margins of the mandelbrot set"""
