@@ -127,7 +127,19 @@
 							>
 						</li>
 					</ul>
-					<aside class="notes">deterministic vs. sampling profilers</aside>
+					<aside class="notes">
+						deterministic vs. sampling profilers
+
+						<strong>NOTE</strong>
+						<br>
+						Execute
+						<code>source .venv.linux/bin/activate</code>
+						<code>
+							uv run --active py-spy top --native --subprocesses -- python -m
+							mandelbrot
+						</code>
+						on Linux
+					</aside>
 				</section>
 				<section>
 					<h1>Profiling</h1>
@@ -159,11 +171,16 @@
 					</p>
 
 					<aside class="notes">
-						<pre><code class="language-python">
-
-						for index in prange(width * height):
-							i = index % width
-							j = index // width
+						In <code>cython_direct/_compute.pyx</code>
+						<pre data-trim><code>
+							channel: int
+							for channel in range(3):
+								pixels[i, j, channel] = colormap[color_index][channel]
+						</code></pre>
+						<pre data-trim><code class="language-python">
+							for index in prange(width * height):
+								i = index % width
+								j = index // width
 						</code></pre>
 					</aside>
 				</section>
