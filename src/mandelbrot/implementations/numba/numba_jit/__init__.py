@@ -55,13 +55,16 @@ def compute_mandelbrot(
 ) -> npt.NDArray[np.uint32]:
     divergence = np.zeros((width, height), dtype=np.uint32)
 
-    x_scale = abs(x[0] - x[1]) / width
-    y_scale = abs(y[0] - y[1]) / height
+    x_min, x_max = x
+    y_min, y_max = y
+
+    x_scale = abs(x_min - x_max) / width
+    y_scale = abs(y_min - y_max) / height
 
     for i in range(width):
         for j in range(height):
             divergence[i, j] = mandelbrot(
-                x[0] + i * x_scale, y[0] + j * y_scale, cutoff
+                x_min + i * x_scale, y_min + j * y_scale, cutoff
             )
     return divergence
 
