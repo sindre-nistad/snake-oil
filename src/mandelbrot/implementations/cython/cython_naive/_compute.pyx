@@ -19,7 +19,7 @@ def mandelbrot(x: double, y: double, cutoff: uint) -> uint:
     """Compute the margins of the mandelbrot set"""
     z = 0 + 0j
     c = x + y * 1j
-    iterations = cython.declare(uint, 0)
+    iterations: uint = 0
     while iterations < cutoff and abs(z) <= 2:
         z = z**2 + c
         iterations += 1
