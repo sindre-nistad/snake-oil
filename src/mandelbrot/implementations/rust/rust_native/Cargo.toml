@@ -9,7 +9,7 @@ name = "_rust_native"
 crate-type = ["cdylib"]
 
 [dependencies]
-ndarray = "0.16.1"
+ndarray = { version = "0.16.1", features = ["rayon"] }
 num = "0.4.3"
 numpy = "0.25.0"
 pyo3 = "0.25.0"

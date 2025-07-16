@@ -147,8 +147,10 @@
 					</aside>
 				</section>
 				<section>
-					<h1>Profiling</h1>
-					<h2>
+					<h1>numpy ufunc</h1>
+				</section>
+				<section>
+					<h1 class="r-fit-text">
 						<code>
 							<a
 								href="https://cython.readthedocs.io/en/stable/src/quickstart/overview.html"
@@ -156,24 +158,15 @@
 								cython
 							</a>
 						</code>
-					</h2>
-					<p>
-						<pre><code>
+					</h1>
+					<pre class="fragment" data-trim><code>
 					# cython: profile=True
 					# cython: linetrace=True
 					# distutils: define_macros=CYTHON_TRACE_NOGIL=1
 				</code></pre>
-					</p>
-					<p>
+
+					<p class="fragment">
 						NOTE: Can be <strong>very</strong>slow
-					</p>
-					<p>
-						For more information, see
-						<a
-							href="https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html"
-						>
-							Cython's page on profiling
-						</a>
 					</p>
 
 					<aside class="notes">
@@ -188,6 +181,7 @@
 								i = index % width
 								j = index // width
 						</code></pre>
+						The remaining implementations will <em>all</em>be parallelized.
 					</aside>
 				</section>
 				<section>

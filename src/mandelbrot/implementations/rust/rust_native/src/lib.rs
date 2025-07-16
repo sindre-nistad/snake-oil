@@ -1,6 +1,7 @@
 use ::pyo3::prelude::*;
 use ::pyo3::Python;
-use ndarray::{Array2, Array3};
+use ndarray::parallel::prelude::*;
+use ndarray::{Array2, Array3, Zip};
 use num::complex::{Complex, ComplexFloat};
 use numpy::{IntoPyArray, PyArray2, PyArray3, PyArrayMethods};
 
@@ -31,15 +32,13 @@ fn compute_mandelbrot<'py>(
     let x_scale = num::abs(x.0 - x.1) / (width as f64);
     let y_scale = num::abs(y.0 - y.1) / (height as f64);
 
-    for i in 0..width {
-        for j in 0..height {
-            pixels[[i, j]] = mandelbrot(
-                x.0 + (i as f64) * x_scale,
-                y.0 + (j as f64) * y_scale,
-                cutoff,
-            )
-        }
-    }
+    Zip::indexed(pixels.view_mut()).par_for_each(|(i, j), val| {
+        *val = mandelbrot(
+            x.0 + (i as f64) * x_scale,
+            y.0 + (j as f64) * y_scale,
+            cutoff,
+        )
+    });
     Ok(pixels.into_pyarray(py))
 }
 
