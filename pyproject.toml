@@ -15,6 +15,12 @@ dependencies = [
     "pygame>=2.6.1",
 ]
 
+[project.optional-dependencies]
+profilers = [
+    "py-spy",
+    "scalene",
+]
+
 [project.gui-scripts]
 mandelbrot = "mandelbrot.__main__:run"
 
