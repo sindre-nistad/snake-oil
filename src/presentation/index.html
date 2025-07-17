@@ -320,14 +320,34 @@
 							</a>
 						</li>
 						<li class="fragment">
+							<a href="https://github.com/pypy/pypy">
+								<code>PyPy</code>
+							</a>
+							/
+							<a href="https://github.com/oracle/graalpython">
+								<code>GraalPy</code>
+							</a>
+							/
 							<a href="https://github.com/exaloop/codon">
 								<code>codon</code>
+							</a>
+							/
+							<a href="https://github.com/spylang/spy">
+								<code>SPy</code>
 							</a>
 						</li>
 					</ul>
 					<aside class="notes">
-						I tried adding an example of using LPython, but I was unable to get
-						it to compile and function on Windows in time.
+						I tried using free-threaded Python in this example, but I was unable
+						to get <code>pygame</code>to compile with it.
+						<br>I tried adding an example of using LPython, but I was unable to
+						get it to compile and function on Windows in time.
+						<br>I was able to install GraalPy with necessary dependencies (on
+						Linux).
+						<code>pygame</code>did compile (mostly). Fonts did not work. When
+						running graal gave an error message saying "Systemic Graal
+						compilation failure detected". Each frame (with the pure Python
+						implementation) took ~30 seconds (compared to ~1s normally)
 
 						<code>numpy.f2py</code>allows you to use Fortran in Python
 
