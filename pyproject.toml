@@ -19,8 +19,8 @@ dependencies = [
 mandelbrot = "mandelbrot.__main__:run"
 
 [build-system]
-requires = ["setuptools"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.uv.sources]
 mandelbrot-implementations-cython-naive = { path = "src/mandelbrot/implementations/cython/cython_naive" }
