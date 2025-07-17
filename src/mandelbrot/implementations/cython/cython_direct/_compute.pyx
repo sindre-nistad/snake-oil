@@ -63,7 +63,9 @@ def compute_mandelbrot(
             # ref. https://ppc.cs.aalto.fi/ch3/nested/ and suggestion by CoPilot
             for j in range(height):
                 divergence = mandelbrot(
-                    x_min + i * x_scale, y_min + j * y_scale, cutoff
+                    x_min + i * x_scale,
+                    y_min + j * y_scale,
+                    cutoff,
                 )
                 color_index: char = cast(char, cast(double, divergence) * normalization)
                 pixels[i, j, :] = colormap[color_index]

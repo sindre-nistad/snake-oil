@@ -42,7 +42,7 @@ class Mandelbrot:
 
 
 def run():
-    from mandelbrot.implementations.nvidia_cuda import MandelbrotComputer
+    from mandelbrot.implementations.pure import MandelbrotComputer
 
     app = Mandelbrot()
     app.start(MandelbrotComputer())

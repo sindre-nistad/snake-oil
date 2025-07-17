@@ -13,5 +13,8 @@ Reveal.initialize({
 	progress: true,
 	markdown: {
 		smartypants: true,
+		hash: true,
+		history: true,
 	},
+	totalTime: 25 /* minutes */ * 60 /* seconds */,
 });

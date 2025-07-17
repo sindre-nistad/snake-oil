@@ -13,7 +13,7 @@ import numpy as np
 cnp.import_array()
 
 
-@cython.cfunc
+@cython.ccall
 @cython.nogil
 def mandelbrot(x: double, y: double, cutoff: uint) -> uint:
     """Compute the margins of the mandelbrot set"""
@@ -45,7 +45,7 @@ def compute_mandelbrot(
     x: tuple[double, double],
     y: tuple[double, double],
     cutoff: uint,
-):
+) -> uint[:, ::1]:
     divergence: uint[:, ::1] = np.zeros((width, height), dtype=np.uint32)
 
     x_min, x_max = x
@@ -57,7 +57,9 @@ def compute_mandelbrot(
     for i in range(width):
         for j in range(height):
             divergence[i, j] = mandelbrot(
-                x_min + i * x_scale, y_min + j * y_scale, cutoff
+                x_min + i * x_scale,
+                y_min + j * y_scale,
+                cutoff,
             )
     return divergence
 

@@ -23,7 +23,7 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/biomejs/pre-commit
-    rev: v2.0.0
+    rev: v2.1.1
     hooks:
       - id: biome-check
         # Formatting HTML is currently in beta, so we need to manually add it to the files regex

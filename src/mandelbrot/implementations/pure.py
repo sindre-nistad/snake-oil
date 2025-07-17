@@ -50,7 +50,9 @@ def compute_mandelbrot(
     for i in range(width):
         for j in range(height):
             divergence[i, j] = mandelbrot(
-                x_min + i * x_scale, y_min + j * y_scale, cutoff
+                x_min + i * x_scale,
+                y_min + j * y_scale,
+                cutoff,
             )
     return divergence
 

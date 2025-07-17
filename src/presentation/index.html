@@ -1,66 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" >
+		<meta charset="UTF-8">
 		<title>Snake Oil</title>
+		<link rel="icon" href="europython-2025-logo.svg">
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1>Snake Oil</h1>
+					<aside class="notes">
+						<h4>Cold open</h4>
+						<ul>
+							<li>Is your snake-based program really lethargic?</li>
+							<li>
+								Does it just sit there in the sun while you are waiting to do
+								what you actually wanted to do?
+							</li>
+						</ul>
+						<p>Do I have a solution for you!</p>
+					</aside>
+				</section>
+				<section>
+					<h1 class="r-fit-text">Snake Oil</h1>
+					<aside class="notes">
+						Unlike the snake oil entrepreneurs of yesteryear, this one [next
+						slide] is rich in Omega-3 fatty acids
+					</aside>
+				</section>
+				<section>
 					<img
-						class="r-stretch"
-						src="/github-url-qr.svg"
-						alt="QR code for https://github.com/sindre-nistad/snake-oil"
+						src="assets/Chinese%20Water%20Snake.jpg"
+						alt="A picture of the Chinese water snake curtesy of the Hong Kong Biodiversity Information Hub (part of the Agriculture, Fisheries and Conservation Department)"
 					>
+					<!--
+					 More pictures:
+					  - https://bih.gov.hk/en/multimedia-database/index.html?animal_group=9&search_type=animal&action=list_multimedia&page=1&page_size=36
+
+					-->
+					<aside class="notes">
+						It was often used in traditional Chinese medicine.
+						<br>
+						It (probably) has similar health benefits as Cod-oil or Salmon
+						<br>
+						Picture of a Chinese water snake, curtesy of the Hong Kong
+						Biodiversity Information Hub (part of the Agriculture, Fisheries and
+						Conservation Department).
+					</aside>
 				</section>
 				<section>
 					<h1>
 						<code>whoami</code>
 					</h1>
 					<p class="fragment">Sindre Nistad</p>
-					<span class="fragment">(pronounced similar to cinder 🔥)</span>
-					<p class="fragment">Developer by day, gamer by night</p>
-				</section>
-				<section>
-					<h1>Mandelbrot</h1>
-				</section>
-				<section>
-					<h1>Mandelbrot</h1>
-					<p>A (complex) number $c$ is in the Mandelbrot set if</p>
-					<p>$ |z_{n}| \le 2 $</p>
-					<p>
-						for all $ n \ge 0 $ \[\begin{aligned} z_{0} = 0 \\ z_{n+1} = z_{n}^2
-						+ c \end{aligned}\]
+					<span class="fragment"
+						>pronounced similar to cinder <span class="fragment">🔥</span></span
+					>
+					<p class="fragment">
+						Consultant @ <a href="https://www.bouvet.no/">Bouvet</a>
+						<span class="fragment">🐧</span>
 					</p>
 				</section>
-				<section>...</section>
+				<section data-transition="slide-in fade-out">
+					<pre>
+						<code
+								class="language-plaintext"
+								style="font-size: .9em; line-height: .9em; max-height: 700px"
+								data-trim
+						>
+						                                                     *
+						                                                   ****
+						                                                  ******
+						                                                   *****
+						                                              * *********
+						                                         *** ****************
+						                                           ******************** **
+						                                        *************************
+						                                       ****************************
+						                                     *******************************
+						                                     ******************************
+						                        * *****     ********************************
+						                       ***********  ********************************
+						                      ************* *******************************
+						                  ** ************** ******************************
+						****************************************************************
+						                  ** ************** ******************************
+						                      ************* *******************************
+						                       ***********  ********************************
+						                        * *****     ********************************
+						                                     ******************************
+						                                     *******************************
+						                                       ****************************
+						                                        *************************
+						                                           ******************** **
+						                                         *** ****************
+						                                              * *********
+						                                                   *****
+						                                                  ******
+						                                                   ****
+						                                                     *
+					</code></pre>
+					<aside class="notes">
+						A reproduction of the first visualization of the Mandelbrot set.
+						First published in 1978 from an IBM mainframe using an
+						<em>old</em>(dot-matrix?) printer
+					</aside>
+				</section>
+				<section data-transition="fade-in slide-out">
+					<p class="r-fit-text">Showtime!</p>
+				</section>
 				<section>
 					<h1>Profiling</h1>
-					<h2>
-						<code>cython</code>
-					</h2>
-					<p>
-						<pre><code>
+					<ul>
+						<li class="fragment">
+							<a href="https://docs.python.org/3/library/profile.html">
+								<code>python -m cProfile</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://github.com/benfred/py-spy">
+								<code>py-spy</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://github.com/plasma-umass/scalene">
+								<code>scalene</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://github.com/P403n1x87/austin">
+								<code>austin</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://docs.python.org/3/library/profile.html">
+								<code>perf</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://developer.nvidia.com/nsight-systems">
+								NVIDIA Nsight Systems
+							</a>
+						</li>
+					</ul>
+					<aside class="notes">
+						deterministic vs. sampling profilers
+
+						<strong>NOTE</strong>
+						<br>
+						Execute
+						<code>source .venv.linux/bin/activate</code>
+						<code>
+							uv run --active py-spy top --native --subprocesses -- python -m
+							mandelbrot
+						</code>
+						on Linux
+					</aside>
+				</section>
+				<section>
+					<h1 class="r-fit-text">
+						<a href="https://numpy.org/doc/stable/reference/ufuncs.html">
+							<code>numpy.ufunc</code>
+						</a>
+					</h1>
+
+					<aside class="notes">
+						Universal functions; used to define functions that should be
+						evaluated elementwise on one (ore more) numpy array.
+
+						<br>
+						<code>@np.vectorize</code>can take any function; including a
+						function from an extension.
+						<pre data-trim><code class="language-python">
+							from mandelbrot.implementations.cython.cython_naive import _compute
+
+							# Replace exising (naïve) implementation with
+							mandelbrot = np.vectorize(_compute.mandelbrot)
+						</code></pre>
+					</aside>
+				</section>
+				<section>
+					<h1 class="r-fit-text">
+						<code>
+							<a
+								href="https://cython.readthedocs.io/en/stable/src/quickstart/overview.html"
+							>
+								cython
+							</a>
+						</code>
+					</h1>
+					<pre class="fragment" data-trim><code>
 					# cython: profile=True
 					# cython: linetrace=True
 					# distutils: define_macros=CYTHON_TRACE_NOGIL=1
 				</code></pre>
-					</p>
-					<p>
+
+					<p class="fragment">
 						NOTE: Can be <strong>very</strong>slow
 					</p>
-					<p>
-						For more information, see
-						<a
-							href="https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html"
-							>Cython's page on profiling</a
-						>
-					</p>
+
+					<aside class="notes">
+						In <code>cython_direct/_compute.pyx</code>
+						<pre data-trim><code class="language-python">
+							channel: int
+							for channel in range(3):
+								pixels[i, j, channel] = colormap[color_index][channel]
+						</code></pre>
+						<pre data-trim><code class="language-python">
+							for index in prange(width * height):
+								i = index % width
+								j = index // width
+						</code></pre>
+						<br>
+						Inlining the function (<code>@cython.inline</code>) can also be
+						done. This has been suggested by multiple speakers here already.
+
+						<br>
+						The remaining implementations will <em>all</em>be parallelized.
+					</aside>
 				</section>
-				<section>
+				<section data-auto-animate>
+					<h1 class="r-fit-text">Rust</h1>
+				</section>
+				<section data-auto-animate>
 					<h1>Rust</h1>
+					<p>
+						via
+						<a href="https://github.com/PyO3/maturin">
+							<code>maturin</code>
+						</a>
+						&<a href="https://github.com/PyO3/pyo3">$PyO_3$</a>
+					</p>
 
 					<aside class="notes">
 						Parallelize the Rust code:
@@ -68,12 +238,12 @@
 						<pre><code data-trim class="language-bash">
 							cd src/mandelbrot/implementations/rust/rust_native
 							cargo add ndarray --features rayon
-						</code> </pre>
+						</code></pre>
 						then add
 						<pre><code data-trim class="language-rust">
 							use ndarray::{Array3, Array2, Zip};
 							use ndarray::parallel::prelude::*;
-						</code> </pre>
+						</code></pre>
 						and replace the for loop with
 						<pre><code data-trim class="language-rust">
 							Zip::indexed(pixels.view_mut()).par_for_each(|(i, j), val| {
@@ -83,44 +253,250 @@
 									cutoff,
 								)
 							});
-						</code> </pre>
+						</code></pre>
+					</aside>
+				</section>
+				<section data-auto-animate>
+					<h1 class="r-fit-text">Nvidia CUDA</h1>
+				</section>
+				<section data-auto-animate>
+					<h1>Nvidia CUDA</h1>
+					<p>
+						via
+						<a href="https://github.com/NVIDIA/cuda-python/tree/main/cuda_core">
+							<code>cuda-core</code>
+						</a>
+					</p>
+					<p class="fragment">
+						There is also
+						<a href="https://documen.tician.de/pyopencl/">
+							<code>PyOpenCL</code>
+						</a>
+					</p>
+					<aside class="notes">
+						<p>
+							GPUs are <em>really</em>good at parallel 32-bit float
+						</p>
+						It is also possible to improve performance by using shared buffers,
+						which will reduce the (relatively) expensive operation of copying
+						memory between the GUP and CPU.
+
+						<br>
+						<hr>
 						as a bonus, or for those who don't like the Mandelbrot set, we could
 						do one of the Julia sets $ c = -0.8 + 0.156i $
 					</aside>
 				</section>
-				<section>
-					<section>
-						<h1>Nvidia CUDA</h1>
-						<p class="fragment">Really good at parallel 32-bit float</p>
-						<aside class="notes">
-							It is also possible to improve performance by using shared buffers
-							and ...
-						</aside>
-
-						<section>
-							<ul>
-								<li>
-									<a
-										href="https://github.com/NVIDIA/cuda-python/tree/main/cuda_core/examples"
-										>CUDA examples</a
-									>
-								</li>
-							</ul>
-						</section>
-					</section>
-				</section>
 
 				<section>
-					<h1>Other projects, and such</h1>
+					<h1>Other tools</h1>
 					<ul>
-						<li>
+						<li class="fragment">
+							<a
+								href="https://docs.python.org/3/howto/free-threading-python.html"
+							>
+								free-threaded Python
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://github.com/pybind/pybind11">
+								<code>pybind11</code>
+							</a>
+							/
+							<a href="https://github.com/wjakob/nanobind">
+								<code>nanobind</code>
+							</a>
+							/
+							<a href="https://github.com/hpyproject/hpy/">
+								<code>HPy</code>
+							</a>
+						</li>
+						<li class="fragment">
 							<a href="https://lpython.org/">LPython</a>
+						</li>
+						<li class="fragment">
+							<a href="https://numpy.org/doc/stable/f2py/">
+								<code class="language-bash">python -m numpy.f2py</code>
+							</a>
+						</li>
+						<li class="fragment">
+							<a href="https://github.com/pypy/pypy">
+								<code>PyPy</code>
+							</a>
+							/
+							<a href="https://github.com/oracle/graalpython">
+								<code>GraalPy</code>
+							</a>
+							/
+							<a href="https://github.com/exaloop/codon">
+								<code>codon</code>
+							</a>
+							/
+							<a href="https://github.com/spylang/spy">
+								<code>SPy</code>
+							</a>
 						</li>
 					</ul>
 					<aside class="notes">
-						I tried adding an example of using LPython, but I was unable to get
-						it to compile and function on Windows in time.
+						I tried using free-threaded Python in this example, but I was unable
+						to get <code>pygame</code>to compile with it.
+						<br>I tried adding an example of using LPython, but I was unable to
+						get it to compile and function on Windows in time.
+						<br>I was able to install GraalPy with necessary dependencies (on
+						Linux).
+						<code>pygame</code>did compile (mostly). Fonts did not work. When
+						running graal gave an error message saying "Systemic Graal
+						compilation failure detected". Each frame (with the pure Python
+						implementation) took ~30 seconds (compared to ~1s normally)
+
+						<code>numpy.f2py</code>allows you to use Fortran in Python
+
+						<code>codon</code>is an alternative Python implementation
 					</aside>
+				</section>
+				<section class="r-stack">
+					<h1 class="r-fit-text">Source code & presentation</h1>
+					<img
+						src="github-url-qr.svg"
+						alt="QR code to the repository for the source code and presentation. Points to https://github.com/sindre-nistad/snake-oil"
+						height="600px"
+					>
+				</section>
+				<section data-visibility="uncounted">
+					<h1>Addendum</h1>
+				</section>
+				<section data-visibility="uncounted">
+					<h1>Sources</h1>
+					<ul>
+						<li>
+							<a
+								href="https://www.npr.org/sections/codeswitch/2013/08/26/215761377/a-history-of-snake-oil-salesmen"
+							>
+								A History Of 'Snake Oil Salesmen'
+							</a>
+							<br>
+							by
+							<a href="https://lakshmigandhi.com/"> Lakshmi Gandhi </a>(<a
+								href="https://www.npr.org"
+								>NPR</a
+							>)
+						</li>
+						<li>
+							<a
+								href="https://www.scientificamerican.com/article/snake-oil-salesmen-knew-something/"
+							>
+								Snake Oil Salesmen Were on to Something
+							</a>
+							<br>
+							by
+							<a
+								href="https://www.scientificamerican.com/author/cynthia-graber/"
+							>
+								Cynthia Graber
+							</a>
+							(<a href="https://www.scientificamerican.com">
+								Scientific American</a
+							>)
+						</li>
+						<li>
+							<a
+								href="https://bih.gov.hk/en/multimedia-database/species/index.html?id=3416"
+							>
+								Chinese Water Snake
+							</a>
+							by Agriculture, Fisheries and Conservation Department, Hong Kong
+						</li>
+					</ul>
+				</section>
+				<section data-visibility="uncounted">
+					<h1>Further reading</h1>
+					<ul>
+						<li class="fragment">
+							<a href="https://wiki.python.org/moin/ForLoop">
+								https://wiki.python.org/moin/ForLoop
+							</a>
+						</li>
+						<li class="fragment">
+							<a
+								href="https://wiki.python.org/moin/PythonSpeed/PerformanceTips"
+							>
+								https://wiki.python.org/moin/PythonSpeed/PerformanceTips
+							</a>
+						</li>
+						<li class="fragment">
+							<a
+								href="https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html"
+							>
+								Cython's page on profiling
+							</a>
+						</li>
+						<li class="fragment">
+							<a
+								href="https://github.com/NVIDIA/cuda-python/tree/main/cuda_core/examples"
+							>
+								CUDA examples
+							</a>
+						</li>
+					</ul>
+				</section>
+				<section data-visibility="uncounted">
+					<section>
+						<h1>Mandelbrot</h1>
+					</section>
+					<section>
+						<h1>Mandelbrot</h1>
+						<p>A (complex) number $c$ is in the Mandelbrot set if</p>
+						<p>$ |z_{n}| \le 2 $</p>
+						<p>
+							for all $ n \ge 0 $ \[\begin{aligned} z_{0} = 0 \\ z_{n+1} =
+							z_{n}^2 + c \end{aligned}\]
+						</p>
+					</section>
+
+					<section>
+						<h2>Video explainers</h2>
+						<ul>
+							<li>
+								<a
+									href="https://www.youtube-nocookie.com/embed/0OP9guFmWfs?privacy_mode=1"
+								>
+									This fractal is more complex than the Mandelbrot set
+								</a>
+								<br>
+								by
+								<a
+									href="https://www.youtube.com/channel/UCSju5G2aFaWMqn-_0YBtq5A"
+								>
+									Stand-up Maths
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.youtube-nocookie.com/embed/FFftmWSzgmk?privacy_mode=1"
+								>
+									What&#39;s so special about the Mandelbrot Set?
+								</a>
+								<br>
+								by
+								<a
+									href="https://www.youtube.com/channel/UCoxcjq-8xIDTYp3uz647V5A"
+								>
+									Numberphile
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.youtube-nocookie.com/embed/ovJcsL7vyrk?privacy_mode=1"
+								>
+									This equation will change how you see the world (the logistic
+									map)
+								</a>
+								<br>
+								by
+								<a href="https://www.youtube.com/@veritasium"> Veritasium </a>
+							</li>
+						</ul>
+					</section>
 				</section>
 			</div>
 		</div>
