@@ -137,7 +137,26 @@
 					</aside>
 				</section>
 				<section>
-					<h1>numpy ufunc</h1>
+					<h1 class="r-fit-text">
+						<a href="https://numpy.org/doc/stable/reference/ufuncs.html">
+							<code>numpy.ufunc</code>
+						</a>
+					</h1>
+
+					<aside class="notes">
+						Universal functions; used to define functions that should be
+						evaluated elementwise on one (ore more) numpy array.
+
+						<br>
+						<code>@np.vectorize</code>can take any function; including a
+						function from an extension.
+						<pre data-trim><code class="language-python">
+							from mandelbrot.implementations.cython.cython_naive import _compute
+
+							# Replace exising (naïve) implementation with
+							mandelbrot = np.vectorize(_compute.mandelbrot)
+						</code></pre>
+					</aside>
 				</section>
 				<section>
 					<h1 class="r-fit-text">
