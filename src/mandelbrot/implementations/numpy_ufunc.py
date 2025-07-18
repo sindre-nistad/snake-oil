@@ -46,7 +46,7 @@ def compute_mandelbrot(
     x_scale = abs(x_min - x_max) / width
     y_scale = abs(y_min - y_max) / height
 
-    x_inputs, y_inputs = np.indices((width, height), dtype=np.float64)
+    x_inputs, y_inputs = np.indices((width, height), dtype=np.uint32)
     divergence = mandelbrot(
         x_min + x_inputs * x_scale,
         y_min + y_inputs * y_scale,
