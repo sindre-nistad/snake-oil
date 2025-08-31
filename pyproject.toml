@@ -12,7 +12,7 @@ dependencies = [
     "mandelbrot-implementations-numba",
     "mandelbrot-implementations-nvidia-cuda; (sys_platform == 'linux' or (os_name == 'nt' and (platform_machine == 'x86_64' or platform_machine == 'AMD64')))",
     "numpy>=2.2.6",
-    "pygame>=2.6.1",
+    "pygame-ce>=2.5.5",
 ]
 
 [project.optional-dependencies]

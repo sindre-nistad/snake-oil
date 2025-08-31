@@ -74,6 +74,13 @@ python3 -m mandelbrot
 
 This will (likely) use pre-compiled packages of the various implementations, which are available on PyPi.
 
+#### Non-CPython implementations
+
+Since `pygame-ce` is currently only pre-compiled for CPython, it will be compiled from source on other implementations of Python.
+
+You will need to install the necessary dependencies as described for [Linux](https://github.com/pygame-community/pygame-ce/wiki/Compiling-on-Linux#1-install-the-dependencies), [macOS](https://github.com/pygame-community/pygame-ce/wiki/Compiling-on-macOS), or [Windows](https://github.com/pygame-community/pygame-ce/wiki/Compiling-on-Windows) on [`pygame-ce`'s wiki](https://github.com/pygame-community/pygame-ce/wiki).
+
+
 ### Presentation
 
 The slides use [Reveal.js](https://revealjs.com) and [`vite`](https://vite.dev) for building / bundling.
