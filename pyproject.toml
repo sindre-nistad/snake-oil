@@ -9,8 +9,8 @@ dependencies = [
     "mandelbrot-implementation-rust-native",
     "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
-    "mandelbrot-implementations-numba",
-    "mandelbrot-implementations-nvidia-cuda; (sys_platform == 'linux' or (os_name == 'nt' and (platform_machine == 'x86_64' or platform_machine == 'AMD64')))",
+    "mandelbrot-implementations-numba; platform_python_implementation == 'CPython'",
+    "mandelbrot-implementations-nvidia-cuda; (sys_platform == 'linux' or (os_name == 'nt' and (platform_machine == 'x86_64' or platform_machine == 'AMD64'))) and platform_python_implementation == 'CPython'",
     "numpy>=2.2.6",
     "pygame-ce>=2.5.5",
 ]
