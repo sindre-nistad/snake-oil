@@ -2,6 +2,8 @@
 
 Presentation and code for "Snake Oil"
 
+The recording from [EuroPython 2025](https://ep2025.europython.eu/session/snake-oil-or-tools-tricks-for-making-python-run-smoother) is [available on YouTube](https://youtu.be/2PLlpV0Vpgg?si=_DXlWRfMtlUkERyp).
+
 A version of this demonstration was first given in [October 2023 at BouvetOne](https://github.com/sindre-nistad/bouvet-one-2023-oktober-slange-olje) and has since been expanded.
 
 This version is more refined and polished and in English rather than Norwegian.
