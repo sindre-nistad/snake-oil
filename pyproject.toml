@@ -21,6 +21,12 @@ profilers = [
     "scalene",
 ]
 
+[dependency-groups]
+dev = [
+    "Cython",
+    "setuptools",
+]
+
 [project.gui-scripts]
 mandelbrot = "mandelbrot.__main__:run"
 
