@@ -1023,7 +1023,7 @@ const RAW_RUNTIME_STATE =
           ["minipass", "npm:7.1.2"],\
           ["minipass-fetch", "npm:4.0.1"],\
           ["minipass-sized", "npm:1.0.3"],\
-          ["minizlib", "npm:3.0.2"]\
+          ["minizlib", "npm:3.1.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1059,14 +1059,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["minizlib", [\
-      ["npm:3.0.2", {\
-        "packageLocation": "./.yarn/cache/minizlib-npm-3.0.2-f56e815013-9f3bd35e41.zip/node_modules/minizlib/",\
-        "packageDependencies": [\
-          ["minipass", "npm:7.1.2"],\
-          ["minizlib", "npm:3.0.2"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:3.1.0", {\
         "packageLocation": "./.yarn/cache/minizlib-npm-3.1.0-6680befdba-5aad75ab00.zip/node_modules/minizlib/",\
         "packageDependencies": [\
