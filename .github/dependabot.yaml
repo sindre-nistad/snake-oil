@@ -1,0 +1,13 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directories:
+      - src/presentation
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "uv"
+    directories:
+      - ./
+    schedule:
+      interval: "monthly"
