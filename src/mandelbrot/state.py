@@ -90,18 +90,18 @@ class InteractionState:
                 diff = mouse_position_before_zoom - mouse_position_after_zoom
                 diff.y *= self.aspect_ratio
                 self.center += diff
-
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_PLUS] or keys[pygame.K_KP_PLUS]:
-            # Increase 'resolution'
-            self.cutoff = max(int(self.cutoff * self.detail_scale), self.cutoff + 1)
-        if keys[pygame.K_MINUS] or keys[pygame.K_KP_MINUS]:
-            # Decrease 'resolution'
-            self.cutoff = max(
-                2, min(int(self.cutoff / self.detail_scale), self.cutoff - 1)
-            )
-        if keys[pygame.K_c]:
-            if keys[pygame.K_LSHIFT]:
-                self.color.previous()
-            else:
-                self.color.next()
+            elif event.type == pygame.KEYDOWN:
+                if event.unicode == "+":
+                    # Increase 'resolution'
+                    self.cutoff = max(
+                        int(self.cutoff * self.detail_scale), self.cutoff + 1
+                    )
+                elif event.unicode == "-":
+                    # Decrease 'resolution'
+                    self.cutoff = max(
+                        2, min(int(self.cutoff / self.detail_scale), self.cutoff - 1)
+                    )
+                elif event.unicode == "C":
+                    self.color.previous()
+                elif event.unicode == "c":
+                    self.color.next()
