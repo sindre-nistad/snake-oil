@@ -1,0 +1,25 @@
+[tools]
+python = "3.14.2"
+pre-commit = "4.2.0"
+node = { version = "22.20.0", postinstall = "corepack enable"}
+rust = "1.87.0"
+uv = "0.9.28"
+
+[tasks.start]
+run = "uv --verbose run python -m mandelbrot"
+
+[tasks."configure-msvc"]
+run_windows = '{{config_root}}\msvc\vcvars-x64.bat'
+
+[settings]
+lockfile = true
+
+[env]
+MISE_NODE_COREPACK = true
+#MISE_PYTHON_PRECOMPILED_FLAVOR = "freethreaded+pgo-full"
+#MISE_PYTHON_COMPILE = "0"
+#XDG_CACHE_HOME = "{{config_root}}/.cache"
+
+_.path = { path = "{{config_root}}\\msvc\\autoenv\\x64" }
+CC = "{{config_root}}\\msvc\\autoenv\\x64\\cl.exe"
+CXX = "{{config_root}}\\msvc\\autoenv\\x64\\cl.exe"
