@@ -17,6 +17,8 @@ To run the `mandelbrot` program, you will need
 * A C compiler
   * Windows
     * [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/)
+
+      **NOTE**: To ensure relevant headers are installed, I would recommend including "Desktop development with C++" during the installation
   * Linux
     * [`gcc`](https://gcc.gnu.org/) or [`llvm`](https://llvm.org/)
   * macOS
