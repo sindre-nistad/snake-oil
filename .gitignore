@@ -209,3 +209,11 @@ profile.html
 
 # cProfile
 Profile.prof
+
+# MSVCUP
+msvcup
+msvcup.exe
+msvcup.pdb
+msvc-*/
+msvc/
+autoenv/

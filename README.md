@@ -13,7 +13,7 @@ This version is more refined and polished and in English rather than Norwegian.
 ### Demonstration
 
 To run the `mandelbrot` program, you will need
-* [`mise`](https://mise.jdx.dev/getting-started.htmlvfox) (or [`vfox`](https://vfox.dev/guides/quick-start.html) or [`asdf`](https://asdf-vm.com/guide/getting-started.html)) to install and manage the runtimes used
+* [`mise`](https://mise.jdx.dev/getting-started.htmlvfox) to install and manage the runtimes used
 * A C compiler
   * Windows
     * [Visual Studio Community 2022](https://visualstudio.microsoft.com/vs/community/)
