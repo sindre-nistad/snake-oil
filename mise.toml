@@ -1,9 +1,9 @@
 [tools]
-python = "3.13.2"
-pre-commit = "4.2.0"
-node = { version = " 22.15.1", postinstall = "corepack enable" }
-rust = { version = "1.87.0", profile = "minimal", components = "rustfmt" }
-uv = "0.7.19"
+python = "3.14.3"
+pre-commit = "4.5.1"
+node = { version = "24.14.0", postinstall = "corepack enable" }
+rust = { version = "1.94.0", profile = "minimal", components = "rustfmt" }
+uv = "0.10.9"
 
 [tasks.start]
 run = "uv run python -m mandelbrot"
