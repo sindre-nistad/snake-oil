@@ -1,0 +1,22 @@
+[project]
+name = "mandelbrot.implementations.apple-metal"
+version = "0.1.0"
+description = "Implementing the Mandelbrot set using Apple's Metal API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pyobjc-framework-Metal",
+    "pymetal-cpp",
+]
+# or https://github.com/shakfu/pymetal-cpp
+
+# https://github.com/zapccu/Metal64/
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+#    "pygobject-stubs",
+]
