@@ -2,7 +2,7 @@ from pathlib import Path
 
 import cupy as cp
 import numpy as np
-from cuda.core.experimental import Device, LaunchConfig, Program, ProgramOptions, launch
+from cuda.core import Device, LaunchConfig, Program, ProgramOptions, launch
 
 from mandelbrot.domain import ColorMap, MandelbrotComputerInterface, Pixels
 
@@ -38,7 +38,7 @@ class MandelbrotComputer(MandelbrotComputerInterface):
         self.gpu = NvidiaGPU()
         self.stream = self.gpu.device.create_stream()
         # Tell cuPy to use our GPU stream
-        cp.cuda.ExternalStream(int(self.stream.handle), self.gpu.device.device_id).use()
+        cp.cuda.Stream.from_external(self.stream).use()
 
         with open(Path(__file__).parent / "mandelbrot.cu") as f:
             code = f.read()
