@@ -121,6 +121,11 @@
 							</a>
 						</li>
 						<li class="fragment">
+							<a href="https://github.com/joerick/pyinstrument">
+								<code>pyinstrument</code>
+							</a>
+						</li>
+						<li class="fragment">
 							<a href="https://github.com/plasma-umass/scalene">
 								<code>scalene</code>
 							</a>
@@ -174,6 +179,24 @@
 
 							# Replace exising (naïve) implementation with
 							mandelbrot = np.vectorize(_compute.mandelbrot)
+						</code></pre>
+					</aside>
+				</section>
+				<section>
+					<h1 class="r-fit-text">
+						<code>
+							<a
+								href="https://mypyc.readthedocs.io/en/stable/introduction.html"
+							>
+								mypyc
+							</a>
+						</code>
+					</h1>
+					<aside>
+						<pre data-trim><code class="language-bash">
+							 uv run --active pip install 'mypy[mypyc]'
+
+							uv run --active mypyc src/mandelbrot/implementations/pure.py
 						</code></pre>
 					</aside>
 				</section>
