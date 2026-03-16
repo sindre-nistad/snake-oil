@@ -279,6 +279,21 @@
 						memory between the GUP and CPU.
 
 						<br>
+						<h3>Float-ify</h3>
+						<ul>
+							<li>
+								<code>cuDoubleComplex</code>
+								&rarr; <code>cuFloatComplex</code>
+							</li>
+							<li><code>double</code> &rarr; <code>float</code></li>
+							<li><code>cuCabs</code> &rarr; <code>cuCabsf</code></li>
+							<li><code>cuCadd</code> &rarr; <code>cuCaddf</code></li>
+							<li><code>cuCmul</code> &rarr; <code>cuCmulf</code></li>
+						</ul>
+						Also; all th ranges must be converted to
+						<code class="language-python">cp.float32()</code>
+
+						<br>
 						<hr>
 						as a bonus, or for those who don't like the Mandelbrot set, we could
 						do one of the Julia sets $ c = -0.8 + 0.156i $
