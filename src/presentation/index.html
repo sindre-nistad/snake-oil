@@ -193,7 +193,7 @@
 					# distutils: define_macros=CYTHON_TRACE_NOGIL=1
 				</code></pre>
 
-					<p class="fragment">NOTE: Can be <strong>very</strong>slow</p>
+					<p class="fragment">NOTE: Can be <strong>very</strong> slow</p>
 
 					<aside class="notes">
 						In <code>cython_direct/_compute.pyx</code>
@@ -212,7 +212,7 @@
 						done. This has been suggested by multiple speakers here already.
 
 						<br>
-						The remaining implementations will <em>all</em>be parallelized.
+						The remaining implementations will <em>all</em> be parallelized.
 					</aside>
 				</section>
 				<section data-auto-animate>
@@ -273,10 +273,10 @@
 						</a>
 					</p>
 					<aside class="notes">
-						<p>GPUs are <em>really</em>good at parallel 32-bit float</p>
+						<p>GPUs are <em>really</em> good at parallel 32-bit float</p>
 						It is also possible to improve performance by using shared buffers,
 						which will reduce the (relatively) expensive operation of copying
-						memory between the GUP and CPU.
+						memory between the GPU and CPU.
 
 						<br>
 						<h3>Float-ify</h3>
