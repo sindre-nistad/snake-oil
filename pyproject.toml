@@ -19,6 +19,7 @@ dependencies = [
 profilers = [
     "py-spy",
     "scalene",
+    "pyinstrument",
 ]
 
 [dependency-groups]
