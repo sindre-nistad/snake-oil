@@ -152,8 +152,25 @@
 					</ul>
 					<aside class="notes">
 						deterministic vs. sampling profilers
-
 						<br>
+						In Python 3.15, a new module will be introduced;
+						<a
+							href="https://docs.python.org/3.15/library/profiling.html#module-profiling"
+							><code>profiling</code></a
+						>
+						which includes a tracing profiler;
+						<a
+							href="https://docs.python.org/3.15/library/profiling.tracing.html#module-profiling.tracing"
+							><code>profiling.tracing</code></a
+						>
+						(the old <code>cProfile</code>) and a new sampling profiler,
+						<a
+							href="https://docs.python.org/3.15/library/profiling.sampling.html#module-profiling.sampling"
+							><code>profiling.sampling</code></a
+						>
+						(Tachyon)
+
+						<h4><code>pyinstrument</code></h4>
 						<pre><code data-trim class="language-bash">
 							uv run pyinstrument --renderer html .\src\mandelbrot\__main__.py
 						</code></pre>
