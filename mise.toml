@@ -8,6 +8,10 @@ uv = "0.10.9"
 [tasks.start]
 run = "uv run python -m mandelbrot"
 
+[tasks.present]
+dir = "src/presentation"
+run = "yarn start"
+
 [env]
 MISE_NODE_COREPACK = true
 
