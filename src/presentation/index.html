@@ -144,14 +144,14 @@
 					<aside class="notes">
 						deterministic vs. sampling profilers
 
-						<strong>NOTE</strong>
 						<br>
+						<h4>NOTE</h4>
 						Execute
-						<code>source .venv.linux/bin/activate</code>
-						<code>
-							uv run --active py-spy top --native --subprocesses -- python -m
-							mandelbrot
-						</code>
+						<br>
+						<pre><code data-trim class="language-shell">
+							source .venv.linux/bin/activate
+							uv run --active py-spy top --native --subprocesses -- python -m mandelbrot
+						</code></pre>
 						on Linux
 					</aside>
 				</section>
@@ -167,9 +167,11 @@
 						evaluated elementwise on one (ore more) numpy array.
 
 						<br>
-						<code>@np.vectorize</code>can take any function; including a
-						function from an extension.
-						<pre data-trim><code class="language-python">
+						<code class="language-python">@np.vectorize</code>can take any
+						function; including a function from an extension.
+
+						<br>
+						<pre><code data-trim class="language-python">
 							from mandelbrot.implementations.cython.cython_naive import _compute
 
 							# Replace exising (naïve) implementation with
@@ -187,7 +189,7 @@
 							</a>
 						</code>
 					</h1>
-					<pre class="fragment" data-trim><code>
+					<pre class="fragment"><code data-trim class="language-python">
 					# cython: profile=True
 					# cython: linetrace=True
 					# distutils: define_macros=CYTHON_TRACE_NOGIL=1
@@ -197,12 +199,12 @@
 
 					<aside class="notes">
 						In <code>cython_direct/_compute.pyx</code>
-						<pre data-trim><code class="language-python">
+						<pre><code data-trim class="language-python">
 							channel: int
 							for channel in range(3):
 								pixels[i, j, channel] = colormap[color_index][channel]
 						</code></pre>
-						<pre data-trim><code class="language-python">
+						<pre><code data-trim class="language-python">
 							for index in prange(width * height):
 								i = index % width
 								j = index // width
@@ -345,18 +347,22 @@
 					</ul>
 					<aside class="notes">
 						I tried using free-threaded Python in this example, but I was unable
-						to get <code>pygame</code>to compile with it.
+						to get <code>pygame</code> to compile with it.
 						<br>I tried adding an example of using LPython, but I was unable to
 						get it to compile and function on Windows in time.
 						<br>I was able to install GraalPy with necessary dependencies (on
 						Linux).
-						<code>pygame</code>did compile (mostly). Fonts did not work. When
-						running graal gave an error message saying "Systemic Graal
-						compilation failure detected". Each frame (with the pure Python
-						implementation) took ~30 seconds (compared to ~1s normally)
+						<code>pygame</code>
+						did compile (mostly). Fonts did not work. When running graal gave an
+						error message saying "Systemic Graal compilation failure detected".
+						Each frame (with the pure Python implementation) took ~30 seconds
+						(compared to ~1s normally)
 
-						<code>numpy.f2py</code>allows you to use Fortran in Python
+						<br>
+						<code>numpy.f2py</code>
+						allows you to use Fortran in Python
 
+						<br>
 						<code>codon</code>is an alternative Python implementation
 					</aside>
 				</section>
