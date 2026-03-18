@@ -187,6 +187,28 @@
 				</section>
 				<section>
 					<h1 class="r-fit-text">
+						<code>
+							<a
+								href="https://mypyc.readthedocs.io/en/stable/introduction.html"
+							>
+								mypyc
+							</a>
+						</code>
+					</h1>
+					<aside class="notes">
+						Using the <code>mypyc</code> compiler does not do much for us in
+						this case, since it is <em>very</em> compute heavy. In other
+						contexts, it may be able to provide better performance gains.
+
+						<pre><code data-trim class="language-bash">
+							uv pip install 'mypy[mypyc]'
+
+							uv run mypyc src/mandelbrot/implementations/pure.py
+						</code></pre>
+					</aside>
+				</section>
+				<section>
+					<h1 class="r-fit-text">
 						<a href="https://numpy.org/doc/stable/reference/ufuncs.html">
 							<code>numpy.ufunc</code>
 						</a>
@@ -206,28 +228,6 @@
 
 							# Replace exising (naïve) implementation with
 							mandelbrot = np.vectorize(_compute.mandelbrot)
-						</code></pre>
-					</aside>
-				</section>
-				<section>
-					<h1 class="r-fit-text">
-						<code>
-							<a
-								href="https://mypyc.readthedocs.io/en/stable/introduction.html"
-							>
-								mypyc
-							</a>
-						</code>
-					</h1>
-					<aside class="notes">
-						Using the <code>mypyc</code> compiler does not do much for us in
-						this case, since it is <em>very</em> compute heavy. In other
-						contexts, it may be able to provide better performance gains.
-
-						<pre><code data-trim class="language-bash">
-							uv pip install 'mypy[mypyc]'
-
-							uv run mypyc src/mandelbrot/implementations/pure.py
 						</code></pre>
 					</aside>
 				</section>
