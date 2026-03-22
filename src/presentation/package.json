@@ -10,10 +10,10 @@
 		"start": "vite"
 	},
 	"dependencies": {
-		"reveal.js": "^5.2.1"
+		"reveal.js": "^6.0.0"
 	},
 	"devDependencies": {
-		"vite": "^7.3.1"
+		"vite": "^8.0.1"
 	},
 	"packageManager": "yarn@4.13.0"
 }
