@@ -13,7 +13,7 @@
 		"reveal.js": "^6.0.0"
 	},
 	"devDependencies": {
-		"vite": "^8.0.1"
+		"vite": "^8.0.5"
 	},
 	"packageManager": "yarn@4.13.0"
 }
