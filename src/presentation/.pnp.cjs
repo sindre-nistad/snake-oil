@@ -28,7 +28,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["reveal.js", "npm:6.0.0"],\
+          ["reveal.js", "npm:6.0.1"],\
           ["snake-oil", "workspace:."],\
           ["vite", "virtual:f819f746cae977e3bd6d7d33684011041b6423e4b6b2c00e43d0a55beb5cb46a4b69fe755324c0d90a1b2c06dfeac75e3e4eeb75d1be2023e1e7b37c528cdf88#npm:8.0.1"]\
         ],\
@@ -1110,10 +1110,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["reveal.js", [\
-      ["npm:6.0.0", {\
-        "packageLocation": "./.yarn/cache/reveal.js-npm-6.0.0-ea33687d87-a85fe36069.zip/node_modules/reveal.js/",\
+      ["npm:6.0.1", {\
+        "packageLocation": "./.yarn/cache/reveal.js-npm-6.0.1-1c7308d1ac-ff5ab985be.zip/node_modules/reveal.js/",\
         "packageDependencies": [\
-          ["reveal.js", "npm:6.0.0"]\
+          ["reveal.js", "npm:6.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1203,7 +1203,7 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
-          ["reveal.js", "npm:6.0.0"],\
+          ["reveal.js", "npm:6.0.1"],\
           ["snake-oil", "workspace:."],\
           ["vite", "virtual:f819f746cae977e3bd6d7d33684011041b6423e4b6b2c00e43d0a55beb5cb46a4b69fe755324c0d90a1b2c06dfeac75e3e4eeb75d1be2023e1e7b37c528cdf88#npm:8.0.1"]\
         ],\

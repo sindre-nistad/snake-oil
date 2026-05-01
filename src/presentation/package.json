@@ -10,7 +10,7 @@
 		"start": "vite"
 	},
 	"dependencies": {
-		"reveal.js": "^6.0.0"
+		"reveal.js": "^6.0.1"
 	},
 	"devDependencies": {
 		"vite": "^8.0.1"
