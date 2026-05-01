@@ -5,7 +5,7 @@ description = "Live deomonstration of the Mandelbrot set to illustrate performan
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "colorcet>=3.1.0",
+    "colorcet>=3.2.1",
     "mandelbrot-implementation-rust-native",
     "mandelbrot-implementations-cython-direct",
     "mandelbrot-implementations-cython-naive",
