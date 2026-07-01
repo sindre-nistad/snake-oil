@@ -371,7 +371,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "cuda-core", extras = ["cu13"], specifier = ">=0.3.0" },
+    { name = "cuda-core", extras = ["cu13"], specifier = ">=1.0.1" },
     { name = "cupy-cuda13x", specifier = ">=13.4.1" },
 ]
 
