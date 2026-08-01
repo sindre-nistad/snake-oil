@@ -5,7 +5,7 @@ description = "Implementing the Mandelbrot set using Nvidia's CUDA API"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "cuda-core[cu13]>=0.3.0",
+    "cuda-core[cu13]>=1.1.0",
     "cupy-cuda13x>=13.4.1",
 ]
 
