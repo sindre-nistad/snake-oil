@@ -11,8 +11,8 @@ crate-type = ["cdylib"]
 [dependencies]
 ndarray = { version = "0.17.2", features = ["rayon"] }
 num = "0.4.3"
-numpy = "0.28.0"
-pyo3 = "0.28.2"
+numpy = "0.29.0"
+pyo3 = "0.29.2"
 
 
 [profile.release]
