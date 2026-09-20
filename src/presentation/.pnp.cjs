@@ -387,11 +387,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["brace-expansion", [\
-      ["npm:2.1.1", {\
-        "packageLocation": "./.yarn/cache/brace-expansion-npm-2.1.1-7f1a6372a0-63b5ddce60.zip/node_modules/brace-expansion/",\
+      ["npm:2.1.7", {\
+        "packageLocation": "./.yarn/cache/brace-expansion-npm-2.1.7-2aa930ff1e-17ee4194c8.zip/node_modules/brace-expansion/",\
         "packageDependencies": [\
           ["balanced-match", "npm:1.0.2"],\
-          ["brace-expansion", "npm:2.1.1"]\
+          ["brace-expansion", "npm:2.1.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -887,7 +887,7 @@ const RAW_RUNTIME_STATE =
       ["npm:9.0.9", {\
         "packageLocation": "./.yarn/cache/minimatch-npm-9.0.9-3ee8f15008-0b6a58530d.zip/node_modules/minimatch/",\
         "packageDependencies": [\
-          ["brace-expansion", "npm:2.1.1"],\
+          ["brace-expansion", "npm:2.1.7"],\
           ["minimatch", "npm:9.0.9"]\
         ],\
         "linkType": "HARD"\
@@ -983,10 +983,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["nanoid", [\
-      ["npm:3.3.12", {\
-        "packageLocation": "./.yarn/cache/nanoid-npm-3.3.12-41f8e0bb94-ba142b7b39.zip/node_modules/nanoid/",\
+      ["npm:3.3.19", {\
+        "packageLocation": "./.yarn/cache/nanoid-npm-3.3.19-b508bd6b51-ce7afa6258.zip/node_modules/nanoid/",\
         "packageDependencies": [\
-          ["nanoid", "npm:3.3.12"]\
+          ["nanoid", "npm:3.3.19"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1086,12 +1086,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["postcss", [\
-      ["npm:8.5.15", {\
-        "packageLocation": "./.yarn/cache/postcss-npm-8.5.15-8e6eef9b78-7f2e63ae22.zip/node_modules/postcss/",\
+      ["npm:8.5.28", {\
+        "packageLocation": "./.yarn/cache/postcss-npm-8.5.28-5a200e589f-9fe44215a6.zip/node_modules/postcss/",\
         "packageDependencies": [\
-          ["nanoid", "npm:3.3.12"],\
+          ["nanoid", "npm:3.3.19"],\
           ["picocolors", "npm:1.1.1"],\
-          ["postcss", "npm:8.5.15"],\
+          ["postcss", "npm:8.5.28"],\
           ["source-map-js", "npm:1.2.1"]\
         ],\
         "linkType": "HARD"\
@@ -1402,7 +1402,7 @@ const RAW_RUNTIME_STATE =
           ["less", null],\
           ["lightningcss", "npm:1.32.0"],\
           ["picomatch", "npm:4.0.4"],\
-          ["postcss", "npm:8.5.15"],\
+          ["postcss", "npm:8.5.28"],\
           ["rolldown", "npm:1.0.3"],\
           ["sass", null],\
           ["sass-embedded", null],\
