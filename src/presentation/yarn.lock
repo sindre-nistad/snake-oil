@@ -945,10 +945,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"reveal.js@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "reveal.js@npm:6.0.1"
-  checksum: 10c0/ff5ab985bef1bd0a1bd9f8963e794a6ca8fac6abe2f887e74b864b6df1646ea919b91e09eb1b658f83b67ccc4294e968b836cfdecb24b67f32bbb582c3c9ab1b
+"reveal.js@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "reveal.js@npm:6.0.2"
+  checksum: 10c0/0e4d036c77597c359bbb3202fcd7581993675f5d1ddd249e16c3ba9c52c063aa690ddea60f5b78534ac67be7f73a2d9c4f168573c2a58e4b38dd34bac247b16d
   languageName: node
   linkType: hard
 
@@ -1060,7 +1060,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "snake-oil@workspace:."
   dependencies:
-    reveal.js: "npm:^6.0.1"
+    reveal.js: "npm:^6.0.2"
     vite: "npm:^8.0.16"
   languageName: unknown
   linkType: soft
